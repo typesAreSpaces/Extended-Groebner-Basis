@@ -125,12 +125,12 @@ def extGroebnerBasis(polys, R):
     B = list(combinations(polys, 2))
     while B:
         (g1, g2) = B.pop()
-        # print "Processing {} and {}".format(g1, g2)
+        # print( "Processing {} and {}".format(g1, g2)))
         (m1, m2) = spolCoeffs(g1, g2, R)
         g = m1*g1 - m2*g2
         (coeffs, residue) = redPol(g, G, R)
         if(residue != 0):
-            # print "We need to add {}. Original: {} Coeffs: {}".format(residue, g, coeffs)
+            # print( "We need to add {}. Original: {} Coeffs: {}".format(residue, g, coeffs))
             for element in G:
                 B.append((element, residue))
             new_entry = FamilyEntry({}, original_polys)  
@@ -159,7 +159,7 @@ def existsReduciblePoly(polys, familyCoeffs, R):
         del familyCoeffs[poly]
         (coeffs, r) = redPol(poly, polys, R)
         if (r != poly):
-            # print "This was reducible modulo polys. poly: {} and r: {}".format(poly, r)
+            # print( "This was reducible modulo polys. poly: {} and r: {}".format(poly, r))
             return (True, coeffs, poly_entry, poly, r)
         polys.appendleft(poly)
         familyCoeffs[poly] = poly_entry
@@ -168,7 +168,7 @@ def existsReduciblePoly(polys, familyCoeffs, R):
 
 def reduceBasis(original_basis, basis, familyCoeffs, R):
     basis_ = deque(basis)
-    # print "Before\nbasis: {}\nfamilyCoeffs: {}".format(basis_, familyCoeffs)
+    # print( "Before\nbasis: {}\nfamilyCoeffs: {}".format(basis_, familyCoeffs))
     (termination_condition, coeffs_poly, poly_entry, poly, residue) = existsReduciblePoly(basis_, familyCoeffs, R)
     while(termination_condition):
         if(residue != 0):
@@ -190,7 +190,7 @@ def reduceBasis(original_basis, basis, familyCoeffs, R):
             familyCoeffs[basis_[index]] = familyCoeffs[current_poly] * (1 / leading_coeff)
             del familyCoeffs[current_poly]
         index += 1
-    # print "After\nbasis: {}\nfamilyCoeffs: {}".format(basis_, familyCoeffs)
+    # print( "After\nbasis: {}\nfamilyCoeffs: {}".format(basis_, familyCoeffs))
     return (basis_, familyCoeffs)
 
 def redExtGroebnerBasis(polys, R):
@@ -224,10 +224,10 @@ def testRedExtGroebner():
     # basis = [y^2-x,x^2-y*z-1,z^2-x]
     basis = [y^2-x,x^2-y*z-1, z^3 -2*y^3 + 3*x^2]
     (groebner_basis, coeffs) = redExtGroebnerBasis(basis, R2)
-    print groebner_basis
+    print( groebner_basis)
     for key in coeffs.map:
         value = coeffs.map[key].getPolynomial()
-        print "Expected: {}\nReality : {}\nCorrect?: {}".format(key, value, key == value)
+        print( "Expected: {}\nReality : {}\nCorrect?: {}".format(key, value, key == value))
 
 # ---------------------------------------------------------------------------------------
 
@@ -237,7 +237,7 @@ def existsReducible(polys, R):
         poly = polys.pop() 
         (coeffs, r) = redPol(poly, polys, R)
         if (r != poly):
-            # print "This was reducible modulo polys. poly: {} and r: {}".format(poly, r)
+            # print( "This was reducible modulo polys. poly: {} and r: {}".format(poly, r))
             return (True, poly, r)
         polys.appendleft(poly)
         num_elements -= 1
@@ -247,7 +247,7 @@ def interReduce(original_basis, R):
     original_basis_ = deepcopy(original_basis)
     basis_ = deque(original_basis)
     inverse_lift_map = {}
-    # print "Before\nbasis: {}\nfamilyCoeffs: {}".format(basis_, familyCoeffs)
+    # print( "Before\nbasis: {}\nfamilyCoeffs: {}".format(basis_, familyCoeffs))
     (termination_condition, poly, residue) = existsReducible(basis_, R)
     while(termination_condition):
         if(residue != 0):
@@ -267,7 +267,7 @@ def interReduce(original_basis, R):
             if(current_poly in inverse_lift_map):
                 inverse_lift_map[basis_[index]] = inverse_lift_map.pop(current_poly)
         index += 1
-    # print "After\nbasis: {}\nfamilyCoeffs: {}".format(basis_, familyCoeffs)
+    # print( "After\nbasis: {}\nfamilyCoeffs: {}".format(basis_, familyCoeffs))
     return (basis_, inverse_lift_map)
 
 
@@ -298,13 +298,13 @@ def truncatePolynomial(poly, leading_monomial, R):
 
 def profKapurAlgorithm(basis, R1, R2):
     # Step 1:
-    print "Step 1:"
+    print( "Step 1:")
     I = ideal(basis)
     gb = I.groebner_basis()
-    print "Groebner basis wrt R1: {}\n".format(gb)
+    print( "Groebner basis wrt R1: {}\n".format(gb))
 
     # Step 2:
-    print "Step 2"
+    print( "Step 2")
     truncated_basis = []
     truncation_map = {}
     for poly in gb:
@@ -316,28 +316,28 @@ def profKapurAlgorithm(basis, R1, R2):
     num_iter = 1
     repeat = True
     while(repeat):
-        print "Truncated basis {}".format(truncated_basis)
-        print "Truncation map: {}\n".format(truncation_map)
+        print( "Truncated basis {}".format(truncated_basis))
+        print( "Truncation map: {}\n".format(truncation_map))
 
         # Step 3:
-        print "Step 3"
+        print( "Step 3")
         (g2h, familyCoeffs) = redExtGroebnerBasis(truncated_basis, R2)
-        print "G2h: {}\n".format(g2h)
+        print( "G2h: {}\n".format(g2h))
 
         # Step 4:
-        print "Step 4"
-        print "FamilyCoeffs Before Lifting: {}".format(familyCoeffs)
+        print( "Step 4")
+        print( "FamilyCoeffs Before Lifting: {}".format(familyCoeffs))
         inverse_lift_map = liftFamilyCoeffs(familyCoeffs, truncation_map)
-        print "FamilyCoeffs After Lifting: {}\n".format(familyCoeffs)
+        print( "FamilyCoeffs After Lifting: {}\n".format(familyCoeffs))
 
         g2c = familyCoeffs.map.keys()
-        print "G2c Before interreduce: {}".format(g2c)
-        print "Inverse Lift Map Before interreduce: {}\n".format(inverse_lift_map)
+        print( "G2c Before interreduce: {}".format(g2c))
+        print( "Inverse Lift Map Before interreduce: {}\n".format(inverse_lift_map))
         
         (inter_reduced_basis, inter_reduce_lift_map) = interReduce(g2c, R2)
-        print "Interreduce Lift Map {}\n".format(inter_reduce_lift_map)
+        print( "Interreduce Lift Map {}\n".format(inter_reduce_lift_map))
         g2c = list(inter_reduced_basis)
-        print "G2c After interreduce: {}".format(g2c)
+        print( "G2c After interreduce: {}".format(g2c))
 
         aux_inverse_lift_map = {}
         for poly in g2c:
@@ -358,12 +358,12 @@ def profKapurAlgorithm(basis, R1, R2):
             else:
                 aux_inverse_lift_map[poly] = -inverse_lift_map[-poly]
 
-        print "Inverse Lift Map After interreduce: {}\n".format(aux_inverse_lift_map)
+        print( "Inverse Lift Map After interreduce: {}\n".format(aux_inverse_lift_map))
         inverse_lift_map = aux_inverse_lift_map
 
         # poss 2
-        print "poss 2"
-        print "Num iterations of poss 2: {}\n".format(num_iter)
+        print( "poss 2")
+        print( "Num iterations of poss 2: {}\n".format(num_iter))
         num_iter += 1
         repeat = False
         truncated_basis = []
@@ -381,7 +381,7 @@ def profKapurAlgorithm(basis, R1, R2):
                 truncation_map[lift_poly] = lift_poly
                 truncated_basis.append(lift_poly)
 
-    print "Done"
+    print( "Done")
 
 def testProfKapurAlgorithm():
     
@@ -389,24 +389,24 @@ def testProfKapurAlgorithm():
     R2 = PolynomialRing(QQ, 3, 'xyz', order='lex')
     (x, y, z) = R1.gens()
     basis1 = [y^2-x,x^2-y*z-1,z^2-x]
-    print "--- Basis: {} From deglex x > y > z to lex x > y > z".format(basis1)
+    print( "--- Basis: {} From deglex x > y > z to lex x > y > z".format(basis1))
     profKapurAlgorithm(basis1, R1, R2)
 
     R3 = PolynomialRing(QQ, 3, 'xyz', order='degrevlex')
     R4 = PolynomialRing(QQ, 3, 'zyx', order='lex')
     basis2 = [x*y+z-x*z, x^2-z, 2*x^3-x^2*y*z-1]
-    print "--- Basis: {} From degrevlex x > y > z to lex z > y > x".format(basis2)
+    print( "--- Basis: {} From degrevlex x > y > z to lex z > y > x".format(basis2))
     profKapurAlgorithm(basis2, R3, R4)
 
     basis3 = [x + y + z, x*y + y*z + z*y, x*y*z - 1]
-    print "--- Basis: {} From deglex x > y > z to lex x > y > z".format(basis3)
+    print( "--- Basis: {} From deglex x > y > z to lex x > y > z".format(basis3))
     profKapurAlgorithm(basis3, R1, R2)
 
     R5 = PolynomialRing(QQ, 4, 'xyzu', order='deglex')
     R6 = PolynomialRing(QQ, 4, 'xyzu', order='lex')
     (x, y, z, u) = R5.gens()
     basis4 = [x + y + z + u, x*y + y*z + z*u + u*x, x*y*z + y*z*u + z*u*x + u*x*y, x*y*z*u - 1]
-    print "--- Basis: {} From deglex x > y > z > u to lex x > y > z > u".format(basis4)
+    print( "--- Basis: {} From deglex x > y > z > u to lex x > y > z > u".format(basis4))
     profKapurAlgorithm(basis4, R5, R6)
 
 def test2ProfKapurAlgorithm():
@@ -414,7 +414,7 @@ def test2ProfKapurAlgorithm():
     R2 = PolynomialRing(QQ, 4, 'xyzu', order='lex')
     (x, y, z, u) = R1.gens()
     basis1 = [x^2-x+2*y^2+2*z^2+2*u^2, 2*x*y+2*y*z+2*z*u-y, 2*x*z+y^2+2*y*u-z, x+2*y+2*z+2*u-1]
-    print "--- Basis: {} From deglex x > y > z > u to lex x > y > z > u".format(basis1)
+    print( "--- Basis: {} From deglex x > y > z > u to lex x > y > z > u".format(basis1))
     profKapurAlgorithm(basis1, R1, R2)
     
     
@@ -424,10 +424,10 @@ def test3ProfKapurAlgorithm():
     (a, b, c) = R1.gens()
     # (a, b, c) = R2.gens()
     basis1 = [a^5-2*b^2+b^3+b^4-2*a^2+2*a^2*b^2+a^4, c-1+b^2+a^2, b^6+3*b^2-3*b^4-b^5+3*a^2-6*a^2*b^2+3*a^2*b^4-3*a^4+3*a^4*b^2]
-    print "--- Basis: {} From wdeglex 5, 6, 13 a > b > c to wdeglex 13, 5, 4 a > b > c".format(basis1)
+    print( "--- Basis: {} From wdeglex 5, 6, 13 a > b > c to wdeglex 13, 5, 4 a > b > c".format(basis1))
     profKapurAlgorithm(basis1, R1, R2)
     # I = ideal(basis1)
-    # print I.groebner_basis()
+    # print( I.groebner_basis())
 
 
 def testHandExampleProfKapurAlgorithm():
@@ -436,7 +436,7 @@ def testHandExampleProfKapurAlgorithm():
     R2 = PolynomialRing(QQ, 3, 'xyz', order='lex')
     (x, y, z) = R1.gens()
     basis1 = [y^2-x,x^2-y*z-1,z^2-x]
-    print "--- Basis: {} From deglex x > y > z to lex x > y > z".format(basis1)
+    print( "--- Basis: {} From deglex x > y > z to lex x > y > z".format(basis1))
     profKapurAlgorithm(basis1, R1, R2)
 
 if __name__ == "__main__":
