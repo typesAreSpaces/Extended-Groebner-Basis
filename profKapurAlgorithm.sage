@@ -384,7 +384,6 @@ def profKapurAlgorithm(basis, R1, R2):
     print( "Done")
 
 def testProfKapurAlgorithm():
-    
     R1 = PolynomialRing(QQ, 3, 'xyz', order='deglex')
     R2 = PolynomialRing(QQ, 3, 'xyz', order='lex')
     (x, y, z) = R1.gens()
@@ -392,6 +391,10 @@ def testProfKapurAlgorithm():
     print( "--- Basis: {} From deglex x > y > z to lex x > y > z".format(basis1))
     profKapurAlgorithm(basis1, R1, R2)
 
+def test1ProfKapurAlgorithm():
+    R1 = PolynomialRing(QQ, 3, 'xyz', order='deglex')
+    R2 = PolynomialRing(QQ, 3, 'xyz', order='lex')
+    (x, y, z) = R1.gens()
     R3 = PolynomialRing(QQ, 3, 'xyz', order='degrevlex')
     R4 = PolynomialRing(QQ, 3, 'zyx', order='lex')
     basis2 = [x*y+z-x*z, x^2-z, 2*x^3-x^2*y*z-1]
@@ -441,7 +444,8 @@ def testHandExampleProfKapurAlgorithm():
 
 if __name__ == "__main__":
 
-    # testProfKapurAlgorithm()
+    testProfKapurAlgorithm()
+    # test1ProfKapurAlgorithm()
     # test2ProfKapurAlgorithm()
-    test3ProfKapurAlgorithm()
+    # test3ProfKapurAlgorithm()
     # testHandExampleProfKapurAlgorithm()
