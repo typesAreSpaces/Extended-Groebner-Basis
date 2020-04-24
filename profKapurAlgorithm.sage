@@ -4,6 +4,7 @@ from sage.rings.rational_field                         import QQ
 from copy                                              import deepcopy
 from itertools                                         import combinations
 from collections                                       import deque
+from StringIO                                          import StringIO
 
 class FamilyEntry:
     def __init__(self, initial_map, basis):
@@ -71,10 +72,21 @@ class FamilyIndexedPolynomials:
         del self.map[key]
 
     def __str__(self):
-        return "{}".format(self.map)
+        output = StringIO()
+        print >>output, ""
+        for key, value in self.map.items():
+            print >>output, "Polynomial: {} Coefficients {}".format(repr(key), repr(value))
+        ans = "{}".format(output.getvalue())
+        output.close()
+        return ans 
 
     def __repr__(self):
-        return "{}".format(self.map)
+        output = StringIO()
+        for key, value in self.map.items():
+            print >>output, "Polynomial: {} Coefficients {}".format(repr(key), repr(value))
+        ans = "{}".format(output.getvalue())
+        output.close()
+        return ans 
 
     def pop(self, key):
         return self.map.pop(key)
