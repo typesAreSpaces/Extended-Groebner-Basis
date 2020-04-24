@@ -35,16 +35,16 @@ class FamilyEntry:
     def __str__(self):
         output = StringIO()
         for key, value in self.map.items():
-            print >>output, "Basis Element: {}, Multiplier: {}".format(repr(key), repr(value))
-        ans = "{}".format(output.getvalue())
+            output.write("Basis Element: {}, Multiplier: {}\n".format(repr(key), repr(value)))
+        ans = output.getvalue()
         output.close()
         return ans
 
     def __repr__(self):
         output = StringIO()
         for key, value in self.map.items():
-            print >>output, "Basis Element: {}, Multiplier: {}".format(repr(key), repr(value))
-        ans = "{}".format(output.getvalue())
+            output.write("Basis Element: {}, Multiplier: {}\n".format(repr(key), repr(value)))
+        ans = output.getvalue()
         output.close()
         return ans
 
@@ -84,16 +84,16 @@ class FamilyIndexedPolynomials:
     def __str__(self):
         output = StringIO()
         for key, value in self.map.items():
-            print >>output, "Polynomial: {}\nCoefficients:\n{}".format(repr(key), repr(value))
-        ans = "{}".format(output.getvalue())
+            output.write("Polynomial: {}\nCoefficients:\n{}".format(repr(key), repr(value)))
+        ans = output.getvalue()
         output.close()
         return ans 
 
     def __repr__(self):
         output = StringIO()
         for key, value in self.map.items():
-            print >>output, "Polynomial: {}\nCoefficients:\n{}".format(repr(key), repr(value))
-        ans = "{}".format(output.getvalue())
+            output.write("Polynomial: {}\nCoefficients:\n{}".format(repr(key), repr(value)))
+        ans = output.getvalue()
         output.close()
         return ans 
 
@@ -347,13 +347,13 @@ def profKapurAlgorithm(basis, R1, R2):
 
         # Step 4:
         print( "Step 4")
-        print( "FamilyCoeffs Before Lifting: {}".format(familyCoeffs))
+        print( "FamilyCoeffs Before Lifting:\n{}".format(familyCoeffs))
         inverse_lift_map = liftFamilyCoeffs(familyCoeffs, truncation_map)
-        print( "FamilyCoeffs After Lifting: {}\n".format(familyCoeffs))
+        print( "FamilyCoeffs After Lifting:\n{}".format(familyCoeffs))
 
         g2c = familyCoeffs.map.keys()
         print( "G2c Before interreduce: {}".format(g2c))
-        print( "Inverse Lift Map Before interreduce: {}\n".format(inverse_lift_map))
+        print( "Inverse Lift Map Before interreduce: {}".format(inverse_lift_map))
         
         (inter_reduced_basis, inter_reduce_lift_map) = interReduce(g2c, R2)
         print( "Interreduce Lift Map {}\n".format(inter_reduce_lift_map))
