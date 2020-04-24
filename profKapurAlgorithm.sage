@@ -33,10 +33,20 @@ class FamilyEntry:
         return new
 
     def __str__(self):
-        return "{}".format(self.map)
+        output = StringIO()
+        for key, value in self.map.items():
+            print >>output, "Basis Element: {}, Multiplier: {}".format(repr(key), repr(value))
+        ans = "{}".format(output.getvalue())
+        output.close()
+        return ans
 
     def __repr__(self):
-        return "{}".format(self.map)
+        output = StringIO()
+        for key, value in self.map.items():
+            print >>output, "Basis Element: {}, Multiplier: {}".format(repr(key), repr(value))
+        ans = "{}".format(output.getvalue())
+        output.close()
+        return ans
 
     def __len__(self):
         return len(self.map)
@@ -73,9 +83,8 @@ class FamilyIndexedPolynomials:
 
     def __str__(self):
         output = StringIO()
-        print >>output, ""
         for key, value in self.map.items():
-            print >>output, "Polynomial: {} Coefficients {}".format(repr(key), repr(value))
+            print >>output, "Polynomial: {}\nCoefficients:\n{}".format(repr(key), repr(value))
         ans = "{}".format(output.getvalue())
         output.close()
         return ans 
@@ -83,7 +92,7 @@ class FamilyIndexedPolynomials:
     def __repr__(self):
         output = StringIO()
         for key, value in self.map.items():
-            print >>output, "Polynomial: {} Coefficients {}".format(repr(key), repr(value))
+            print >>output, "Polynomial: {}\nCoefficients:\n{}".format(repr(key), repr(value))
         ans = "{}".format(output.getvalue())
         output.close()
         return ans 
