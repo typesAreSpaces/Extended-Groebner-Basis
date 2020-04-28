@@ -1,4 +1,4 @@
 all:
-	sage profKapurAlgorithm.sage
+	sage a.sage
 	rm -rf *.py
 	
