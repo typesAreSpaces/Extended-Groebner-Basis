@@ -1,4 +1,4 @@
 all:
-	sage a.sage
+	sage b.sage
 	rm -rf *.py
 	
