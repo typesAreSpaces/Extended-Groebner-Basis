@@ -218,6 +218,7 @@ def reduceBasis(original_basis, basis, family_coeffs, R):
                 poly_entry, poly, residue) = existsReduciblePoly(basis_, family_coeffs, R)
         if(not termination_condition):
             break
+        # print "reduceBasis: Poly: {} residue: {}".format(poly, residue)
         if(residue != 0):
             family_coeffs.keyInit(residue)
             for indexing_polynomial, coeff in coeffs_poly.items():
@@ -334,7 +335,7 @@ def basisConversion(basis, R1, R2):
         reduceBasis(original_elements, F_t, family_coeffs, R2)
         M_ = family_coeffs.toMatrix()
         print "F_t after interreduce: {}".format([poly for poly in M_*vector(original_elements)])
-        print "Associated Interredcution Matrix:\n{}".format(M_)
+        print "Associated Interreduction Matrix:\n{}".format(M_)
         M = M_ * M
 
         print "F before update: {}".format(F)
