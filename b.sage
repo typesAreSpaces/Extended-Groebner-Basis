@@ -399,7 +399,7 @@ def testBasisConversion():
     print "Groebner basis: {}".format(gb)
     print "Associated matrix:\n{}".format(M)
     print "Check if basis is Groebner basis: {}".format(Ideal(gb).basis_is_groebner())
-    # print "Groebner basis computed by SageMath: {}".format(Ideal(basis1).groebner_basis())
+    print Ideal(basis).groebner_basis()
 
 if __name__ == "__main__":
 
