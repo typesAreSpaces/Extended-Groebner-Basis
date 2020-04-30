@@ -235,8 +235,8 @@ def reduceBasis(original_basis, basis, family_coeffs, R):
             family_coeffs[basis_[index]] = family_coeffs[current_poly] * (1 / leading_coeff)
             del family_coeffs[current_poly]
         index += 1
-    return (basis_, family_coeffs)
-
+    return basis_
+ 
 def redExtGroebnerBasis(original_polys, polys, R):
     (gbasis, family_coeffs) = extGroebnerBasis(original_polys, polys, R)
 
@@ -248,8 +248,8 @@ def redExtGroebnerBasis(original_polys, polys, R):
             gbasis_.append(poly)
         else:
             del family_coeffs[poly]
-
-    return reduceBasis(original_polys, gbasis_, family_coeffs, R)
+    reduced_gb = reduceBasis(original_polys, gbasis_, family_coeffs, R)
+    return (reduced_gb, family_coeffs) 
 
 # ---------------------------------------------------------------------------------------
 # TESTS
@@ -275,65 +275,33 @@ def testRedExtGroebner():
     vec_gb2.sort()
     print "Test equivalence between groebner basis and matrix multiplication: {}"\
             .format(vec_gb1 == vec_gb2)
+
+def composeGBTransformationsTest():
+    R1 = PolynomialRing(QQ, 3, 'xyz', order='deglex')
+    R2 = PolynomialRing(QQ, 3, 'xyz', order='lex')
+    R3 = PolynomialRing(QQ, 3, 'xyz', order='degrevlex')
+    (x, y, z) = R1.gens()
+    basis1 = [y^2-x,x^2-y*z-1,z^2-x]
+    original_elements = deepcopy(basis1)
+    (gb, coeffs) = redExtGroebnerBasis(original_elements, basis1, R2)
+    M1 = coeffs.toMatrix()
+    basis2 = list(gb)
+    original_elements2 = deepcopy(basis2)
+    (gb2, coeffs2) = redExtGroebnerBasis(original_elements2, basis2, R3)
+    M2 = coeffs2.toMatrix()
+    test1 = [R1(x) for x in gb2]
+    test2 = [R1(x) for x in M2*M1*vector(original_elements)]
+    test1.sort()
+    test2.sort()
+    print test1 == test2
 # ---------------------------------------------------------------------------------------
 
-
-
 # ---------------------------------------------------------------------------------------
-
-def existsReducible(polys, R):
-    num_elements = len(polys)
-    while(num_elements):
-        poly = polys.pop() 
-        (coeffs, r) = redPol(poly, polys, R)
-        if (r != poly):
-            return (True, poly, r)
-        polys.appendleft(poly)
-        num_elements -= 1
-    return (False, None, None)
-
-def interReduce(original_basis, R):
-    original_basis_ = deepcopy(original_basis)
-    basis_ = deque(original_basis)
-    inverse_lift_map = {}
-    (termination_condition, poly, residue) = existsReducible(basis_, R)
-    while(termination_condition):
-        if(residue != 0):
-            while(not(poly in original_basis_)):
-                poly = inverse_lift_map[poly]
-            inverse_lift_map[residue] = poly
-            basis_.appendleft(residue)
-        (termination_condition, poly, residue) = existsReducible(basis_, R)
-
-    num_elements = len(basis_)
-    index = 0
-    while (index < num_elements):
-        current_poly = R(basis_[index])
-        leading_coeff = current_poly.lc()
-        if(leading_coeff != 1):
-            basis_[index] = (1 / leading_coeff) * current_poly 
-            if(current_poly in inverse_lift_map):
-                inverse_lift_map[basis_[index]] = inverse_lift_map.pop(current_poly)
-        index += 1
-    return (basis_, inverse_lift_map)
-
-def liftFamilyCoeffs(family_coeffs, truncation_map):
-    inverse_lift_map = {}
-    for key, value in truncation_map.items():
-        if (key != value):
-            for poly, family_entry in family_coeffs.map.items():
-                family_entry[value] = family_entry.pop(key)
-                family_coeffs[poly] = family_entry
-                if(family_entry[value] != 0):
-                    lift_poly = poly + family_entry[value] * (value - key)
-                    family_coeffs[lift_poly] = family_coeffs.pop(poly)
-                    inverse_lift_map[lift_poly] = poly
-                else:
-                    inverse_lift_map[poly] = poly
-    return inverse_lift_map
+# Prof Kapur Basis Conversion Algorithm 
 
 def truncatePolynomial(poly, R1, R2):
-    leading_monomial = R1(poly).lm()
+    poly = R1(poly)
+    leading_monomial = poly.lm()
     result = leading_monomial * poly.monomial_coefficient(leading_monomial)
     poly = R2(poly)
     for monomial in poly.monomials():
@@ -343,46 +311,98 @@ def truncatePolynomial(poly, R1, R2):
     return result
 
 def basisConversion(basis, R1, R2):
-    print "Step 1:"
+    print "Step 1"
     basis_1 = [R1(x) for x in basis]
     I = ideal(basis_1)
-    F = I.groebner_basis()
+    F = [poly for poly in I.groebner_basis()]
     num_elements = len(F)
     M = matrix.identity(num_elements)
     M_ = matrix.identity(num_elements)
     print "Groebner basis wrt R1: {}".format(F)
 
-    print "Step 2:"
-    F_t = [truncatePolynomial(poly, R1, R2) for poly in F]
-    print "F_t: {}".format(F_t)
-    (F_, inverse_lift_map) = interReduce(F_t, R2)
-    print "F_: {}".format(F_)
-    print "Inverse Lift Map: {}".format(inverse_lift_map)
+    num_iter = 1
+
+    while(True):
+        print "\nIteration {}".format(num_iter)
+        num_iter += 1
+        
+        print "Step 2" 
+        F_t = [truncatePolynomial(poly, R1, R2) for poly in F]
+        original_elements = deepcopy(F_t)
+        print "F_t before interreduce: {}".format(F_t)
+        family_coeffs = FamilyIndexedPolynomials(original_elements)
+        reduceBasis(original_elements, F_t, family_coeffs, R2)
+        M_ = family_coeffs.toMatrix()
+        print "F_t after interreduce: {}".format([poly for poly in M_*vector(original_elements)])
+        print "Associated Interredcution Matrix:\n{}".format(M_)
+        M = M_ * M
+
+        print "F before update: {}".format(F)
+        F = [poly for poly in M_ * vector(F)]
+        print "F after update: {}".format(F)
+
+        F_t = [truncatePolynomial(poly, R1, R2) for poly in F]
+        print "F_t after truncate F: {}".format(F_t)
+
+        print "\nStep 3"
+        original_F_t = deepcopy(F_t)
+        (H, family_coeffs2) = redExtGroebnerBasis(original_F_t, F_t, R2)
+        print "H: {}".format(list(H))
+
+        print "\nStep 4"
+        M_ = family_coeffs2.toMatrix()
+        print "Matrix of multipliers:\n{}".format(M_)
+
+        print "\nStep 5"
+        G = [poly for poly in M_ * vector(F)]
+        M = M_ * M
+        print "G: {}".format(G)
+
+        print "\nStep 6 and 7"
+        h = M_*vector(original_F_t)
+        assert len(h) == len(G)
+        num_elements = len(h)
+        index = 0
+        repeat = False
+        print "The h_j's: {}".format([poly for poly in h])
+        print "The g_j's: {}".format(G)
+        while(index < num_elements):
+            g_j = R2(G[index])
+            h_j = R2(h[index])
+            if(g_j.lm() != h_j.lm()):
+                print "These are the witness polynomials that "\
+                        "prove G_s is not empty: g_j = {}, h_j = {}"\
+                        .format(g_j, h_j)
+                repeat = True
+                break
+            index += 1
+        if(not repeat):
+            print "Done"
+            original_G = deepcopy(G)
+            new_family_coeffs = FamilyIndexedPolynomials(original_G)
+            gb = reduceBasis(original_G, G, new_family_coeffs, R2)
+            return (list(gb), M)
+        else:
+            F = G
+
     pass
 
 def testBasisConversion():
     R1 = PolynomialRing(QQ, 3, 'xyz', order='deglex')
     R2 = PolynomialRing(QQ, 3, 'xyz', order='lex')
-    (x, y, z) = R1.gens()
+    (x, y, z) = R2.gens()
     basis1 = [y^2-x,x^2-y*z-1,z^2-x]
-    print( "--- Basis: {} From deglex x > y > z to lex x > y > z".format(basis1))
-    # basisConversion(basis1, R1, R2)
-    original_basis = deepcopy(basis1)
-    gb, M = redExtGroebnerBasis(original_basis, basis1, R2)
-
-    # print "Input basis: {}\nGroebner basis: {}\n".format(original_basis, gb)
-    # print "Original basis: {}".format(M.toMatrix()\vector(M.originalBasis()))
-    # print "Original basis: {}".format(vector(M.originalBasis())*M.toMatrix())
-    # gb2 = [R2(x) for x in gb] 
-    # print Ideal(gb2).basis_is_groebner()
+    print("Basis: {} From {} {} to {} {}".\
+            format(basis1, R1, R1.term_order(), R2, R2.term_order()))
+    gb, M = basisConversion(basis1, R1, R2)
+    print "Results:" 
+    print "Groebner basis: {}".format(gb)
+    print "Associated matrix:\n{}".format(M)
+    print "Check if basis is Groebner basis: {}".format(Ideal(gb).basis_is_groebner())
 
 if __name__ == "__main__":
 
-    # testProfKapurAlgorithm()
-    # test1ProfKapurAlgorithm()
-    # test2ProfKapurAlgorithm()
-    # test3ProfKapurAlgorithm()
-    # testHandExampleProfKapurAlgorithm()
-    testRedExtGroebner()
+    # testRedExtGroebner()
+    # composeGBTransformationsTest()
     testBasisConversion()
-    
+    pass

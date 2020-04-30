@@ -1,0 +1,99 @@
+sage b.sage
+Basis: [-x + y^2, x^2 - y*z - 1, -x + z^2] From Multivariate Polynomial Ring in x, y, z over Rational Field Degree lexicographic term order to Multivariate Polynomial Ring in x, y, z over Rational Field Lexicographic term order
+Step 1
+Groebner basis wrt R1: [x^2 - y*z - 1, y^2 - x, z^2 - x]
+
+Iteration 1
+Step 2
+F_t before interreduce: [x^2, y^2 - x, z^2 - x]
+F_t after interreduce: [z^4, x - z^2, y^2 - z^2]
+Associated Interredcution Matrix:
+[      1       0 x + z^2]
+[      0       0      -1]
+[      0       1      -1]
+F before update: [x^2 - y*z - 1, y^2 - x, z^2 - x]
+F after update: [-y*z + z^4 - 1, x - z^2, y^2 - z^2]
+F_t after truncate F: [z^4 - y*z, -z^2 + x, y^2]
+
+Step 3
+H: [z^7, y^2, -z^2 + x, y*z - z^4]
+
+Step 4
+Matrix of multipliers:
+[      0       1       0]
+[      0       0       1]
+[y + z^3       0       z]
+[     -1       0       0]
+
+Step 5
+G: [x - z^2, y^2 - z^2, -y + z^7 - 2*z^3, y*z - z^4 + 1]
+
+Step 6 and 7
+The h_j's: [x - z^2, y^2, z^7, y*z - z^4]
+The g_j's: [x - z^2, y^2 - z^2, -y + z^7 - 2*z^3, y*z - z^4 + 1]
+These are the witness polynomials that prove G_s is not empty: g_j = -y + z^7 - 2*z^3, h_j = z^7
+
+Iteration 2
+Step 2
+F_t before interreduce: [-z^2 + x, y^2, z^7 - y, -z^4 + y*z]
+F_t after interreduce: [x - z^2, y, z^4]
+Associated Interredcution Matrix:
+[                    1                     0                     0                     0]
+[                    0                   z^5 y*z^5 - z^8 - z^4 - 1     -z^11 - z^7 - z^3]
+[                    0                   z^2       y*z^2 - z^5 - z        -z^8 - z^4 - 1]
+F before update: [x - z^2, y^2 - z^2, -y + z^7 - 2*z^3, y*z - z^4 + 1]
+F after update: [x - z^2, -2*y*z^8 + y + z^11 + z^3, -2*y*z^5 + z^8 + z^4 - 1]
+F_t after truncate F: [-z^2 + x, z^11 - 2*y*z^8 + y, z^8 - 2*y*z^5]
+
+Step 3
+H: [z^8, y, -z^2 + x]
+
+Step 4
+Matrix of multipliers:
+[         1          0          0]
+[         0      2*z^5 -2*z^8 + 1]
+[         0          1       -z^3]
+
+Step 5
+G: [x - z^2, -2*z^12 + 5*z^8 + z^4 - 1, y - z^7 + 2*z^3]
+
+Step 6 and 7
+The h_j's: [x - z^2, z^8, y]
+The g_j's: [x - z^2, -2*z^12 + 5*z^8 + z^4 - 1, y - z^7 + 2*z^3]
+These are the witness polynomials that prove G_s is not empty: g_j = -2*z^12 + 5*z^8 + z^4 - 1, h_j = z^8
+
+Iteration 3
+Step 2
+F_t before interreduce: [-z^2 + x, -2*z^12, -z^7 + y]
+F_t after interreduce: [-z^7 + y, -z^2 + x, z^12]
+Associated Interredcution Matrix:
+[   0    0    1]
+[   1    0    0]
+[   0 -1/2    0]
+F before update: [x - z^2, -2*z^12 + 5*z^8 + z^4 - 1, y - z^7 + 2*z^3]
+F after update: [y - z^7 + 2*z^3, x - z^2, z^12 - 5/2*z^8 - 1/2*z^4 + 1/2]
+F_t after truncate F: [-z^7 + y, -z^2 + x, z^12]
+
+Step 3
+H: [z^12, -z^2 + x, -z^7 + y]
+
+Step 4
+Matrix of multipliers:
+[1 0 0]
+[0 1 0]
+[0 0 1]
+
+Step 5
+G: [y - z^7 + 2*z^3, x - z^2, z^12 - 5/2*z^8 - 1/2*z^4 + 1/2]
+
+Step 6 and 7
+The h_j's: [-z^7 + y, -z^2 + x, z^12]
+The g_j's: [y - z^7 + 2*z^3, x - z^2, z^12 - 5/2*z^8 - 1/2*z^4 + 1/2]
+Done
+Results:
+Groebner basis: [y - z^7 + 2*z^3, x - z^2, z^12 - 5/2*z^8 - 1/2*z^4 + 1/2]
+Associated matrix:
+[                                                                                                     -y - z^3                                                                                                            -z                                                                                -x*y - x*z^3 - y*z^2 - z^5 + z]
+[                                                                                                            0                                                                                                             0                                                                                                            -1]
+[                                                                   -1/2*y^2*z^2 + y*z^5 + 1/2*y*z + z^8 - 1/2                                                                                          -1/2*y*z^3 + 3/2*z^6 -1/2*x*y^2*z^2 + x*y*z^5 + 1/2*x*y*z + x*z^8 - 1/2*x - 1/2*y^2*z^4 + y*z^7 + y*z^3 + z^10 - 3/2*z^6 - 1/2*z^2]
+rm -rf *.py
