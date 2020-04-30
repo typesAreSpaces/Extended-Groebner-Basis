@@ -385,8 +385,6 @@ def basisConversion(basis, R1, R2):
         else:
             F = G
 
-    pass
-
 def testBasisConversion():
     R1 = PolynomialRing(QQ, 3, 'xyz', order='deglex')
     R2 = PolynomialRing(QQ, 3, 'xyz', order='lex')
@@ -406,4 +404,3 @@ if __name__ == "__main__":
     # testRedExtGroebner()
     # composeGBTransformationsTest()
     testBasisConversion()
-    pass
