@@ -1,0 +1,291 @@
+sage basisConversion2.sage
+Basis: [-x + y^2, x^2 - y*z - 1, -x + z^2] From Multivariate Polynomial Ring in x, y, z over Rational Field Degree lexicographic term order to Multivariate Polynomial Ring in x, y, z over Rational Field Lexicographic term order
+Step 1
+Groebner basis wrt R1: [x^2 - y*z - 1, y^2 - x, z^2 - x]
+
+Current F: [x^2 - y*z - 1, y^2 - x, z^2 - x]
+Current F_t: [x^2, y^2 - x, z^2 - x]
+
+Iteration 1
+
+Step 3 & 4
+Included S-polynomial of y^2 - x and z^2 - x: -y^2 + z^2
+Its residue (i.e. mod GB of F_t): -y^2 + z^2
+Coefficients of y^2 - x and z^2 - x respectively: -1, 1
+Coefficients from F_t for the residue:
+Basis Element: x^2
+Multiplier: 0
+Basis Element: y^2 - x
+Multiplier: -1
+Basis Element: z^2 - x
+Multiplier: 1
+
+Included S-polynomial of x^2 and z^2 - x: -x*z^2
+Its residue (i.e. mod GB of F_t): -z^4
+Coefficients of x^2 and z^2 - x respectively: -1, -x
+Coefficients from F_t for the residue:
+Basis Element: x^2
+Multiplier: -1
+Basis Element: y^2 - x
+Multiplier: 0
+Basis Element: z^2 - x
+Multiplier: -x - z^2
+
+Current gb of F_t after completion: [x^2, y^2 - x, z^2 - x, -y^2 + z^2, -z^4]
+
+Redundant polynomial in extended Groebner basis computation: z^2 - x
+Redundant polynomial in extended Groebner basis computation: x^2
+
+Current gb of F_t after elimination of redundant terms: deque([-z^4, -y^2 + z^2, y^2 - x])
+
+Reduce Basis: This poly y^2 - x reduces to -x + z^2
+Coefficients:
+Basis Element: x^2
+Multiplier: 0
+Basis Element: y^2 - x
+Multiplier: 0
+Basis Element: z^2 - x
+Multiplier: 1
+
+Matrix of multipliers M':
+[      0       0      -1]
+[      1       0 x + z^2]
+[      0       1      -1]
+H (= M' * F_t): [x - z^2, z^4, y^2 - z^2]
+
+Step 5
+Matrix of multipliers M after update (i.e. M := M' * M):
+[      0       0      -1]
+[      1       0 x + z^2]
+[      0       1      -1]
+G (= M' * F): [x - z^2, -y*z + z^4 - 1, y^2 - z^2]
+G_full (= M * F_original) [x - z^2, -y*z + z^4 - 1, y^2 - z^2]
+
+Step 6 and 7
+The h_j's: [x - z^2, z^4, y^2 - z^2]
+The g_j's: [x - z^2, -y*z + z^4 - 1, y^2 - z^2]
+These are the witness polynomials that prove G_s is not empty: g_j = -y*z + z^4 - 1, h_j = z^4
+
+Current F: [x - z^2, -y*z + z^4 - 1, y^2 - z^2]
+Current F_t: [-z^2 + x, z^4 - y*z, y^2]
+
+Iteration 2
+
+Step 3 & 4
+Included S-polynomial of z^4 - y*z and y^2: y*z^4
+Its residue (i.e. mod GB of F_t): z^7
+Coefficients of z^4 - y*z and y^2 respectively: y, z
+Coefficients from F_t for the residue:
+Basis Element: -z^2 + x
+Multiplier: 0
+Basis Element: z^4 - y*z
+Multiplier: y + z^3
+Basis Element: y^2
+Multiplier: z
+
+Current gb of F_t after completion: [-z^2 + x, z^4 - y*z, y^2, z^7]
+
+
+Current gb of F_t after elimination of redundant terms: deque([z^7, y^2, z^4 - y*z, -z^2 + x])
+
+Matrix of multipliers M':
+[      1       0       0]
+[      0       0       1]
+[      0 y + z^3       z]
+[      0      -1       0]
+H (= M' * F_t): [x - z^2, y^2, z^7, y*z - z^4]
+
+Step 5
+Matrix of multipliers M after update (i.e. M := M' * M):
+[                            0                             0                            -1]
+[                            0                             1                            -1]
+[                      y + z^3                             z x*y + x*z^3 + y*z^2 + z^5 - z]
+[                           -1                             0                      -x - z^2]
+G (= M' * F): [x - z^2, y^2 - z^2, -y + z^7 - 2*z^3, y*z - z^4 + 1]
+G_full (= M * F_original) [x - z^2, y^2 - z^2, -y + z^7 - 2*z^3, y*z - z^4 + 1]
+
+Step 6 and 7
+The h_j's: [x - z^2, y^2, z^7, y*z - z^4]
+The g_j's: [x - z^2, y^2 - z^2, -y + z^7 - 2*z^3, y*z - z^4 + 1]
+These are the witness polynomials that prove G_s is not empty: g_j = -y + z^7 - 2*z^3, h_j = z^7
+
+Current F: [x - z^2, y^2 - z^2, -y + z^7 - 2*z^3, y*z - z^4 + 1]
+Current F_t: [-z^2 + x, y^2, z^7 - y, -z^4 + y*z]
+
+Iteration 3
+
+Step 3 & 4
+Included S-polynomial of z^7 - y and -z^4 + y*z: z^8 - z^4
+Its residue (i.e. mod GB of F_t): z^8 - z^4
+Coefficients of z^7 - y and -z^4 + y*z respectively: z, 1
+Coefficients from F_t for the residue:
+Basis Element: -z^2 + x
+Multiplier: 0
+Basis Element: y^2
+Multiplier: 0
+Basis Element: z^7 - y
+Multiplier: z
+Basis Element: -z^4 + y*z
+Multiplier: 1
+
+Included S-polynomial of y^2 and -z^4 + y*z: y*z^4
+Its residue (i.e. mod GB of F_t): z^7
+Coefficients of y^2 and -z^4 + y*z respectively: z, -y
+Coefficients from F_t for the residue:
+Basis Element: -z^2 + x
+Multiplier: 0
+Basis Element: y^2
+Multiplier: z
+Basis Element: z^7 - y
+Multiplier: 0
+Basis Element: -z^4 + y*z
+Multiplier: -y - z^3
+
+Included S-polynomial of z^8 - z^4 and z^7: -z^4
+Its residue (i.e. mod GB of F_t): -z^4
+Coefficients of z^8 - z^4 and z^7 respectively: 1, -z
+Coefficients from F_t for the residue:
+Basis Element: -z^2 + x
+Multiplier: 0
+Basis Element: y^2
+Multiplier: -z^2
+Basis Element: z^7 - y
+Multiplier: z
+Basis Element: -z^4 + y*z
+Multiplier: y*z + z^4 + 1
+
+Current gb of F_t after completion: [-z^2 + x, y^2, z^7 - y, -z^4 + y*z, z^8 - z^4, z^7, -z^4]
+
+Redundant polynomial in extended Groebner basis computation: z^7
+Redundant polynomial in extended Groebner basis computation: z^8 - z^4
+Redundant polynomial in extended Groebner basis computation: -z^4 + y*z
+Redundant polynomial in extended Groebner basis computation: y^2
+
+Current gb of F_t after elimination of redundant terms: deque([-z^4, z^7 - y, -z^2 + x])
+
+Reduce Basis: This poly z^7 - y reduces to -y
+Coefficients:
+Basis Element: -z^2 + x
+Multiplier: 0
+Basis Element: y^2
+Multiplier: -z^5
+Basis Element: z^7 - y
+Multiplier: z^4 + 1
+Basis Element: -z^4 + y*z
+Multiplier: y*z^4 + z^7 + z^3
+
+Matrix of multipliers M':
+[                 1                  0                  0                  0]
+[                 0                z^5           -z^4 - 1 -y*z^4 - z^7 - z^3]
+[                 0                z^2                 -z     -y*z - z^4 - 1]
+H (= M' * F_t): [x - z^2, y, z^4]
+
+Step 5
+Matrix of multipliers M after update (i.e. M := M' * M):
+[               0                0               -1]
+[              -y               -z -x*y - y*z^2 + z]
+[               1                0          x + z^2]
+G (= M' * F): [x - z^2, -y*z^4 + y + z^3, -y*z + z^4 - 1]
+G_full (= M * F_original) [x - z^2, -y*z^4 + y + z^3, -y*z + z^4 - 1]
+
+Step 6 and 7
+The h_j's: [x - z^2, y, z^4]
+The g_j's: [x - z^2, -y*z^4 + y + z^3, -y*z + z^4 - 1]
+These are the witness polynomials that prove G_s is not empty: g_j = -y*z^4 + y + z^3, h_j = y
+
+Current F: [x - z^2, -y*z^4 + y + z^3, -y*z + z^4 - 1]
+Current F_t: [-z^2 + x, -y*z^4, z^4 - y*z]
+
+Iteration 4
+
+Step 3 & 4
+Included S-polynomial of -y*z^4 and z^4 - y*z: z^7
+Its residue (i.e. mod GB of F_t): z^7
+Coefficients of -y*z^4 and z^4 - y*z respectively: -1, z^3
+Coefficients from F_t for the residue:
+Basis Element: -z^2 + x
+Multiplier: 0
+Basis Element: -y*z^4
+Multiplier: -1
+Basis Element: z^4 - y*z
+Multiplier: z^3
+
+Current gb of F_t after completion: [-z^2 + x, -y*z^4, z^4 - y*z, z^7]
+
+Redundant polynomial in extended Groebner basis computation: -y*z^4
+
+Current gb of F_t after elimination of redundant terms: deque([z^7, z^4 - y*z, -z^2 + x])
+
+Matrix of multipliers M':
+[  1   0   0]
+[  0  -1 z^3]
+[  0   0  -1]
+H (= M' * F_t): [x - z^2, z^7, y*z - z^4]
+
+Step 5
+Matrix of multipliers M after update (i.e. M := M' * M):
+[                            0                             0                            -1]
+[                      y + z^3                             z x*y + x*z^3 + y*z^2 + z^5 - z]
+[                           -1                             0                      -x - z^2]
+G (= M' * F): [x - z^2, -y + z^7 - 2*z^3, y*z - z^4 + 1]
+G_full (= M * F_original) [x - z^2, -y + z^7 - 2*z^3, y*z - z^4 + 1]
+
+Step 6 and 7
+The h_j's: [x - z^2, z^7, y*z - z^4]
+The g_j's: [x - z^2, -y + z^7 - 2*z^3, y*z - z^4 + 1]
+These are the witness polynomials that prove G_s is not empty: g_j = -y + z^7 - 2*z^3, h_j = z^7
+
+Current F: [x - z^2, -y + z^7 - 2*z^3, y*z - z^4 + 1]
+Current F_t: [-z^2 + x, z^7 - y, -z^4 + y*z]
+
+Iteration 5
+
+Step 3 & 4
+Included S-polynomial of z^7 - y and -z^4 + y*z: z^8 - z^4
+Its residue (i.e. mod GB of F_t): z^8 - z^4
+Coefficients of z^7 - y and -z^4 + y*z respectively: z, 1
+Coefficients from F_t for the residue:
+Basis Element: -z^2 + x
+Multiplier: 0
+Basis Element: z^7 - y
+Multiplier: z
+Basis Element: -z^4 + y*z
+Multiplier: 1
+
+Current gb of F_t after completion: [-z^2 + x, z^7 - y, -z^4 + y*z, z^8 - z^4]
+
+Redundant polynomial in extended Groebner basis computation: -z^4 + y*z
+
+Current gb of F_t after elimination of redundant terms: deque([z^8 - z^4, z^7 - y, -z^2 + x])
+
+Matrix of multipliers M':
+[ 1  0  0]
+[ 0  z  1]
+[ 0 -1  0]
+H (= M' * F_t): [x - z^2, z^8 - z^4, y - z^7]
+
+Step 5
+Matrix of multipliers M after update (i.e. M := M' * M):
+[                                      0                                       0                                      -1]
+[                          y*z + z^4 - 1                                     z^2 x*y*z + x*z^4 - x + y*z^3 + z^6 - 2*z^2]
+[                               -y - z^3                                      -z          -x*y - x*z^3 - y*z^2 - z^5 + z]
+G (= M' * F): [x - z^2, z^8 - 3*z^4 + 1, y - z^7 + 2*z^3]
+G_full (= M * F_original) [x - z^2, z^8 - 3*z^4 + 1, y - z^7 + 2*z^3]
+
+Step 6 and 7
+The h_j's: [x - z^2, z^8 - z^4, y - z^7]
+The g_j's: [x - z^2, z^8 - 3*z^4 + 1, y - z^7 + 2*z^3]
+Done
+
+Current gb of F_t after elimination of redundant terms: deque([x - z^2, z^8 - 3*z^4 + 1, y - z^7 + 2*z^3])
+
+Results:
+Groebner basis produced: [z^8 - 3*z^4 + 1, y - z^7 + 2*z^3, x - z^2]
+Associated matrix:
+[                                      0                                       0                                      -1]
+[                          y*z + z^4 - 1                                     z^2 x*y*z + x*z^4 - x + y*z^3 + z^6 - 2*z^2]
+[                               -y - z^3                                      -z          -x*y - x*z^3 - y*z^2 - z^5 + z]
+Check if basis is Groebner basis: True
+Groebner basis computed by Sage: [z^8 - 3*z^4 + 1, y - z^7 + 2*z^3, x - z^2]
+Check if the produced gb is the same as the gb produced by Sage: True
+rm -rf *.py

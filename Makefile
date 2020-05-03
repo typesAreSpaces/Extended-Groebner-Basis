@@ -1,4 +1,4 @@
 all:
-	sage basisConversion.sage
+	sage basisConversion2.sage
 	rm -rf *.py
 	
