@@ -1,0 +1,50 @@
+Included S-polynomial of z^7 - y and -z^4 + y*z: z^8 - z^4
+Its residue (i.e. mod GB of F_t): -z^4
+Coefficients of z^7 - y and -z^4 + y*z respectively: z, 1
+Coefficients from F_t for the residue:
+Basis Element: z^7 - y
+Multiplier: y^2*z^3 - y*z^6 + z^9 + z^5 + z
+Basis Element: y^2
+Multiplier: -z^10
+Basis Element: -z^2 + x
+Multiplier: -y^3*z + y^2*z^4 - y*z^11 - y*z^7 - y*z^3 + z^14 + z^10 + z^6
+Basis Element: -z^4 + y*z
+Multiplier: x*y^2 + x*z^10 + x*z^6 + x*z^2 + 1
+
+Included S-polynomial of z^7 - y and -z^4 + y*z: z^8 - z^4
+Its residue (i.e. mod GB of F_t): z^8 - z^4
+Coefficients of z^7 - y and -z^4 + y*z respectively: z, 1
+Coefficients from F_t for the residue:
+Basis Element: -z^2 + x
+Multiplier: 0
+Basis Element: y^2
+Multiplier: 0
+Basis Element: z^7 - y
+Multiplier: z
+Basis Element: -z^4 + y*z
+Multiplier: 1
+
+Reduce Basis: This poly z^7 - y reduces to -y
+Coefficients:
+Basis Element: z^7 - y
+Multiplier: y^2*z^6 - y*z^9 + z^12 + z^8 + z^4 + 1
+Basis Element: y^2
+Multiplier: -z^13
+Basis Element: -z^2 + x
+Multiplier: -y^3*z^4 + y^2*z^7 - y*z^14 - y*z^10 - y*z^6 + z^17 + z^13 + z^9
+Basis Element: -z^4 + y*z
+Multiplier: x*y^2*z^3 + x*z^13 + x*z^9 + x*z^5 + z^3
+
+Reduce Basis: This poly z^7 - y reduces to -y
+Coefficients:
+Basis Element: -z^2 + x
+Multiplier: 0
+Basis Element: y^2
+Multiplier: -z^5
+Basis Element: z^7 - y
+Multiplier: z^4 + 1
+Basis Element: -z^4 + y*z
+
+I think the problem happens not really when polynomials have "priority",
+but the example shows that coefficients "should be simplified"
+in order to have "decent" matrices.

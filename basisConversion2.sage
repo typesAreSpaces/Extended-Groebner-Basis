@@ -184,15 +184,15 @@ def extGroebnerBasis(original_polys, polys, R):
             G.append(residue)
     return (G, family_coeffs)
 
-def checkRedundantPolyGroebner(poly, polys, R):
+def isPolyRedundantInBasis(poly, polys, R):
     poly = R(poly)
     lead_monomial = LM(poly)
     for elem in polys:
         elem = R(elem)
         curr_lead_monomial = LM(elem)
         if(R.monomial_divides(curr_lead_monomial, lead_monomial)):
-            return False
-    return True
+            return True
+    return False
 
 def existsReduciblePoly(polys, family_coeffs, R):
     num_elements = len(polys)
@@ -215,11 +215,16 @@ def existsReduciblePoly(polys, family_coeffs, R):
         num_elements -= 1
     return (False, None, None, None, None)
 
-def reduceBasis(original_basis, basis, family_coeffs, R):
+def reduceBasis(original_basis, basis, family_coeffs, R, priority=False):
     basis_ = deque(basis)
     print "\nCurrent gb of F_t after elimination"\
             " of redundant terms: {}\n".format([poly for poly in family_coeffs.toMatrix() * vector(original_basis)])
     while(True):
+        # The following .sort() makes sure we reduce a "bigger polynomial"
+        # instead of reducing a "smaller polynomial" first even if
+        # in both cases it doesn't matter which ones gets reduced
+        if(priority):
+            basis_ = deque(sorted(basis_))
         (termination_condition, coeffs_poly, \
                 poly_entry, poly, residue) = existsReduciblePoly(basis_, family_coeffs, R)
         if(not termination_condition):
@@ -245,22 +250,27 @@ def reduceBasis(original_basis, basis, family_coeffs, R):
         index += 1
     return basis_
 
-def redExtGroebnerBasis(original_polys, polys, R):
+def redExtGroebnerBasis(original_polys, polys, R, priority=False):
     (gbasis, family_coeffs) = extGroebnerBasis(original_polys, polys, R)
 
     print "Current gb of F_t after completion: {}\n".format(gbasis)
 
     gbasis_ = []
     while (gbasis):
+        # The following .sort() makes sure we reduce a "bigger polynomial"
+        # instead of reducing a "smaller polynomial" first even if
+        # in both cases it doesn't matter which ones gets reduced
+        if(priority):
+            gbasis.sort()
         poly = gbasis.pop()
-        if checkRedundantPolyGroebner(poly, gbasis, R) \
-                and checkRedundantPolyGroebner(poly, gbasis_, R):
+        if (not isPolyRedundantInBasis(poly, gbasis, R)) \
+                and (not isPolyRedundantInBasis(poly, gbasis_, R)):
             gbasis_.append(poly)
         else:
             print "Redundant polynomial in extended Groebner basis computation: {}".format(poly)
             del family_coeffs[poly]
 
-    reduced_gb = reduceBasis(original_polys, gbasis_, family_coeffs, R)
+    reduced_gb = reduceBasis(original_polys, gbasis_, family_coeffs, R, priority)
     return (reduced_gb, family_coeffs) 
 
 # ---------------------------------------------------------------------------------------
@@ -439,7 +449,7 @@ def basisConversion(basis, R1, R2):
             F = G
             F_t = [truncatePolynomial(poly, R1, R2) for poly in F]
 
-def basisConversion2(basis, R1, R2):
+def basisConversion2(basis, R1, R2, priority):
     print "Step 1"
     basis_1 = [R1(x) for x in basis]
     I = ideal(basis_1)
@@ -461,7 +471,7 @@ def basisConversion2(basis, R1, R2):
         
         print "\nStep 3 & 4"
         original_F_t = deepcopy(F_t)
-        (H, family_coeffs2) = redExtGroebnerBasis(original_F_t, F_t, R2)
+        (H, family_coeffs2) = redExtGroebnerBasis(original_F_t, F_t, R2, priority)
         M_ = family_coeffs2.toMatrix()
         print "Matrix of multipliers M':\n{}".format(M_)
         print "H (= M' * F_t): {}".format([poly for poly in M_ * vector(original_F_t)])
@@ -495,7 +505,7 @@ def basisConversion2(basis, R1, R2):
             print "Done"
             original_G = deepcopy(G)
             new_family_coeffs = FamilyIndexedPolynomials(original_G)
-            gb = reduceBasis(original_G, G, new_family_coeffs, R2)
+            gb = reduceBasis(original_G, G, new_family_coeffs, R2, priority)
             return (list(gb), M)
         else:
             F = G
@@ -520,7 +530,8 @@ def testBasisConversion():
 def testBasisConversion2(R1, R2, basis1):
     print("Basis: {} From {} {} to {} {}".\
             format(basis1, R1, R1.term_order(), R2, R2.term_order()))
-    gb, M = basisConversion2(basis1, R1, R2)
+    # gb, M = basisConversion2(basis1, R1, R2, False)
+    gb, M = basisConversion2(basis1, R1, R2, True)
     print "Results:" 
     gb.sort()
     print "Groebner basis produced: {}".format(gb)

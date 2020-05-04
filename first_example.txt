@@ -33,19 +33,10 @@ Multiplier: -x - z^2
 
 Current gb of F_t after completion: [x^2, y^2 - x, z^2 - x, -y^2 + z^2, -z^4]
 
-Redundant polynomial in extended Groebner basis computation: z^2 - x
 Redundant polynomial in extended Groebner basis computation: x^2
+Redundant polynomial in extended Groebner basis computation: y^2 - x
 
-Current gb of F_t after elimination of redundant terms: [-x + y^2, -y^2 + z^2, -z^4]
-
-Reduce Basis: This poly y^2 - x reduces to -x + z^2
-Coefficients:
-Basis Element: x^2
-Multiplier: 0
-Basis Element: y^2 - x
-Multiplier: 0
-Basis Element: z^2 - x
-Multiplier: 1
+Current gb of F_t after elimination of redundant terms: [-x + z^2, -y^2 + z^2, -z^4]
 
 Matrix of multipliers M':
 [      0       0      -1]
@@ -89,203 +80,283 @@ Current gb of F_t after completion: [-z^2 + x, z^4 - y*z, y^2, z^7]
 Current gb of F_t after elimination of redundant terms: [x - z^2, -y*z + z^4, y^2, z^7]
 
 Matrix of multipliers M':
-[      1       0       0]
-[      0       0       1]
 [      0 y + z^3       z]
+[      0       0       1]
+[      1       0       0]
 [      0      -1       0]
-H (= M' * F_t): [x - z^2, y^2, z^7, y*z - z^4]
+H (= M' * F_t): [z^7, y^2, x - z^2, y*z - z^4]
 
 Step 5
 Matrix of multipliers M after update (i.e. M := M' * M):
-[                            0                             0                            -1]
-[                            0                             1                            -1]
 [                      y + z^3                             z x*y + x*z^3 + y*z^2 + z^5 - z]
+[                            0                             1                            -1]
+[                            0                             0                            -1]
 [                           -1                             0                      -x - z^2]
-G (= M' * F): [x - z^2, y^2 - z^2, -y + z^7 - 2*z^3, y*z - z^4 + 1]
-G_full (= M * F_original) [x - z^2, y^2 - z^2, -y + z^7 - 2*z^3, y*z - z^4 + 1]
+G (= M' * F): [-y + z^7 - 2*z^3, y^2 - z^2, x - z^2, y*z - z^4 + 1]
+G_full (= M * F_original) [-y + z^7 - 2*z^3, y^2 - z^2, x - z^2, y*z - z^4 + 1]
 
 Step 6 and 7
-The h_j's: [x - z^2, y^2, z^7, y*z - z^4]
-The g_j's: [x - z^2, y^2 - z^2, -y + z^7 - 2*z^3, y*z - z^4 + 1]
+The h_j's: [z^7, y^2, x - z^2, y*z - z^4]
+The g_j's: [-y + z^7 - 2*z^3, y^2 - z^2, x - z^2, y*z - z^4 + 1]
 These are the witness polynomials that prove G_s is not empty: g_j = -y + z^7 - 2*z^3, h_j = z^7
 
-Current F: [x - z^2, y^2 - z^2, -y + z^7 - 2*z^3, y*z - z^4 + 1]
-Current F_t: [-z^2 + x, y^2, z^7 - y, -z^4 + y*z]
+Current F: [-y + z^7 - 2*z^3, y^2 - z^2, x - z^2, y*z - z^4 + 1]
+Current F_t: [z^7 - y, y^2, -z^2 + x, -z^4 + y*z]
 
 Iteration 3
 
 Step 3 & 4
+Included S-polynomial of -z^2 + x and -z^4 + y*z: x*z^4 - y*z^3
+Its residue (i.e. mod GB of F_t): -z^10 + z^6
+Coefficients of -z^2 + x and -z^4 + y*z respectively: y*z, -x
+Coefficients from F_t for the residue:
+Basis Element: z^7 - y
+Multiplier: -z^3
+Basis Element: y^2
+Multiplier: 0
+Basis Element: -z^2 + x
+Multiplier: y*z - z^4
+Basis Element: -z^4 + y*z
+Multiplier: -x
+
+Included S-polynomial of y^2 and -z^10 + z^6: -y^2*z^6
+Its residue (i.e. mod GB of F_t): -z^8
+Coefficients of y^2 and -z^10 + z^6 respectively: -z^10, -y^2
+Coefficients from F_t for the residue:
+Basis Element: z^7 - y
+Multiplier: y^2*z^3 - y*z^6 + z^9 + z^5
+Basis Element: y^2
+Multiplier: -z^10
+Basis Element: -z^2 + x
+Multiplier: -y^3*z + y^2*z^4 - y*z^11 - y*z^7 - y*z^3 + z^14 + z^10 + z^6
+Basis Element: -z^4 + y*z
+Multiplier: x*y^2 + x*z^10 + x*z^6 + x*z^2
+
+Included S-polynomial of -z^10 + z^6 and -z^8: -z^6
+Its residue (i.e. mod GB of F_t): -z^6
+Coefficients of -z^10 + z^6 and -z^8 respectively: -1, z^2
+Coefficients from F_t for the residue:
+Basis Element: z^7 - y
+Multiplier: y^2*z^5 - y*z^8 + z^11 + z^7 + z^3
+Basis Element: y^2
+Multiplier: -z^12
+Basis Element: -z^2 + x
+Multiplier: -y^3*z^3 + y^2*z^6 - y*z^13 - y*z^9 - y*z^5 - y*z + z^16 + z^12 + z^8 + z^4
+Basis Element: -z^4 + y*z
+Multiplier: x*y^2*z^2 + x*z^12 + x*z^8 + x*z^4 + x
+
 Included S-polynomial of z^7 - y and -z^4 + y*z: z^8 - z^4
-Its residue (i.e. mod GB of F_t): z^8 - z^4
+Its residue (i.e. mod GB of F_t): -z^4
 Coefficients of z^7 - y and -z^4 + y*z respectively: z, 1
 Coefficients from F_t for the residue:
-Basis Element: -z^2 + x
-Multiplier: 0
-Basis Element: y^2
-Multiplier: 0
 Basis Element: z^7 - y
-Multiplier: z
-Basis Element: -z^4 + y*z
-Multiplier: 1
-
-Included S-polynomial of y^2 and -z^4 + y*z: y*z^4
-Its residue (i.e. mod GB of F_t): z^7
-Coefficients of y^2 and -z^4 + y*z respectively: z, -y
-Coefficients from F_t for the residue:
-Basis Element: -z^2 + x
-Multiplier: 0
+Multiplier: y^2*z^3 - y*z^6 + z^9 + z^5 + z
 Basis Element: y^2
-Multiplier: z
-Basis Element: z^7 - y
-Multiplier: 0
-Basis Element: -z^4 + y*z
-Multiplier: -y - z^3
-
-Included S-polynomial of z^8 - z^4 and z^7: -z^4
-Its residue (i.e. mod GB of F_t): -z^4
-Coefficients of z^8 - z^4 and z^7 respectively: 1, -z
-Coefficients from F_t for the residue:
+Multiplier: -z^10
 Basis Element: -z^2 + x
-Multiplier: 0
-Basis Element: y^2
-Multiplier: -z^2
-Basis Element: z^7 - y
-Multiplier: z
+Multiplier: -y^3*z + y^2*z^4 - y*z^11 - y*z^7 - y*z^3 + z^14 + z^10 + z^6
 Basis Element: -z^4 + y*z
-Multiplier: y*z + z^4 + 1
+Multiplier: x*y^2 + x*z^10 + x*z^6 + x*z^2 + 1
 
-Current gb of F_t after completion: [-z^2 + x, y^2, z^7 - y, -z^4 + y*z, z^8 - z^4, z^7, -z^4]
+Current gb of F_t after completion: [z^7 - y, y^2, -z^2 + x, -z^4 + y*z, -z^10 + z^6, -z^8, -z^6, -z^4]
 
-Redundant polynomial in extended Groebner basis computation: z^7
-Redundant polynomial in extended Groebner basis computation: z^8 - z^4
+Redundant polynomial in extended Groebner basis computation: -z^10 + z^6
 Redundant polynomial in extended Groebner basis computation: -z^4 + y*z
+Redundant polynomial in extended Groebner basis computation: -z^8
 Redundant polynomial in extended Groebner basis computation: y^2
+Redundant polynomial in extended Groebner basis computation: -z^6
 
-Current gb of F_t after elimination of redundant terms: [x - z^2, -y + z^7, -z^4]
+Current gb of F_t after elimination of redundant terms: [-y + z^7, x - z^2, -z^4]
 
 Reduce Basis: This poly z^7 - y reduces to -y
 Coefficients:
-Basis Element: -z^2 + x
-Multiplier: 0
-Basis Element: y^2
-Multiplier: -z^5
 Basis Element: z^7 - y
-Multiplier: z^4 + 1
+Multiplier: y^2*z^6 - y*z^9 + z^12 + z^8 + z^4 + 1
+Basis Element: y^2
+Multiplier: -z^13
+Basis Element: -z^2 + x
+Multiplier: -y^3*z^4 + y^2*z^7 - y*z^14 - y*z^10 - y*z^6 + z^17 + z^13 + z^9
 Basis Element: -z^4 + y*z
-Multiplier: y*z^4 + z^7 + z^3
+Multiplier: x*y^2*z^3 + x*z^13 + x*z^9 + x*z^5 + z^3
 
 Matrix of multipliers M':
-[                 1                  0                  0                  0]
-[                 0                z^5           -z^4 - 1 -y*z^4 - z^7 - z^3]
-[                 0                z^2                 -z     -y*z - z^4 - 1]
-H (= M' * F_t): [x - z^2, y, z^4]
+[                                                              0                                                               0                                                               1                                                               0]
+[                               -y^2*z^3 + y*z^6 - z^9 - z^5 - z                                                            z^10    y^3*z - y^2*z^4 + y*z^11 + y*z^7 + y*z^3 - z^14 - z^10 - z^6                             -x*y^2 - x*z^10 - x*z^6 - x*z^2 - 1]
+[                        -y^2*z^6 + y*z^9 - z^12 - z^8 - z^4 - 1                                                            z^13 y^3*z^4 - y^2*z^7 + y*z^14 + y*z^10 + y*z^6 - z^17 - z^13 - z^9                       -x*y^2*z^3 - x*z^13 - x*z^9 - x*z^5 - z^3]
+H (= M' * F_t): [x - z^2, z^4, y]
 
 Step 5
 Matrix of multipliers M after update (i.e. M := M' * M):
-[               0                0               -1]
-[              -y               -z -x*y - y*z^2 + z]
-[               1                0          x + z^2]
-G (= M' * F): [x - z^2, -y*z^4 + y + z^3, -y*z + z^4 - 1]
-G_full (= M * F_original) [x - z^2, -y*z^4 + y + z^3, -y*z + z^4 - 1]
+[                                                                                                                                                                                 0                                                                                                                                                                                  0                                                                                                                                                                                 -1]
+[                                                                                                     x*y^2 + x*z^10 + x*z^6 + x*z^2 - y^3*z^3 - y*z^5 - y*z - z^12 - z^8 - z^4 + 1                                                                                                                                                       -y^2*z^4 + y*z^7 - z^6 - z^2                      x^2*y^2 + x^2*z^10 + x^2*z^6 + x^2*z^2 - x*y^3*z^3 + x*y^2*z^2 - x*y*z^5 - x*y*z + x - y^3*z^5 - y^3*z + 2*y^2*z^4 - y*z^11 - 3*y*z^7 - 2*y*z^3 + z^6 + 2*z^2]
+[                                                                                              x*y^2*z^3 + x*z^13 + x*z^9 + x*z^5 - y^3*z^6 - y*z^8 - y*z^4 - y - z^15 - z^11 - z^7                                                                                                                                                  -y^2*z^7 + y*z^10 - z^9 - z^5 - z x^2*y^2*z^3 + x^2*z^13 + x^2*z^9 + x^2*z^5 - x*y^3*z^6 + x*y^2*z^5 - x*y*z^8 - x*y*z^4 - x*y - y^3*z^8 - y^3*z^4 + 2*y^2*z^7 - y*z^14 - 3*y*z^10 - 2*y*z^6 - y*z^2 + z^9 + z^5 + z]
+G (= M' * F): [x - z^2, -x*y^2 - x*z^10 - x*z^6 - x*z^2 + 2*y^2*z^6 - 2*y*z^9 + z^12 + 2*z^8 + 3*z^4 - 1, -x*y^2*z^3 - x*z^13 - x*z^9 - x*z^5 + 2*y^2*z^9 - 2*y*z^12 + y + z^15 + 2*z^11 + 2*z^7 + z^3]
+G_full (= M * F_original) [x - z^2, -x*y^2 - x*z^10 - x*z^6 - x*z^2 + 2*y^2*z^6 - 2*y*z^9 + z^12 + 2*z^8 + 3*z^4 - 1, -x*y^2*z^3 - x*z^13 - x*z^9 - x*z^5 + 2*y^2*z^9 - 2*y*z^12 + y + z^15 + 2*z^11 + 2*z^7 + z^3]
 
 Step 6 and 7
-The h_j's: [x - z^2, y, z^4]
-The g_j's: [x - z^2, -y*z^4 + y + z^3, -y*z + z^4 - 1]
-These are the witness polynomials that prove G_s is not empty: g_j = -y*z^4 + y + z^3, h_j = y
+The h_j's: [x - z^2, z^4, y]
+The g_j's: [x - z^2, -x*y^2 - x*z^10 - x*z^6 - x*z^2 + 2*y^2*z^6 - 2*y*z^9 + z^12 + 2*z^8 + 3*z^4 - 1, -x*y^2*z^3 - x*z^13 - x*z^9 - x*z^5 + 2*y^2*z^9 - 2*y*z^12 + y + z^15 + 2*z^11 + 2*z^7 + z^3]
+These are the witness polynomials that prove G_s is not empty: g_j = -x*y^2 - x*z^10 - x*z^6 - x*z^2 + 2*y^2*z^6 - 2*y*z^9 + z^12 + 2*z^8 + 3*z^4 - 1, h_j = z^4
 
-Current F: [x - z^2, -y*z^4 + y + z^3, -y*z + z^4 - 1]
-Current F_t: [-z^2 + x, -y*z^4, z^4 - y*z]
+Current F: [x - z^2, -x*y^2 - x*z^10 - x*z^6 - x*z^2 + 2*y^2*z^6 - 2*y*z^9 + z^12 + 2*z^8 + 3*z^4 - 1, -x*y^2*z^3 - x*z^13 - x*z^9 - x*z^5 + 2*y^2*z^9 - 2*y*z^12 + y + z^15 + 2*z^11 + 2*z^7 + z^3]
+Current F_t: [-z^2 + x, z^12 - x*z^10 - 2*y*z^9 + 2*y^2*z^6 - x*z^6 - x*y^2 - x*z^2, z^15 - x*z^13 - 2*y*z^12 + 2*y^2*z^9 - x*z^9 - x*y^2*z^3 - x*z^5 + y]
 
 Iteration 4
 
 Step 3 & 4
-Included S-polynomial of -y*z^4 and z^4 - y*z: z^7
-Its residue (i.e. mod GB of F_t): z^7
-Coefficients of -y*z^4 and z^4 - y*z respectively: -1, z^3
+Included S-polynomial of z^12 - x*z^10 - 2*y*z^9 + 2*y^2*z^6 - x*z^6 - x*y^2 - x*z^2 and z^15 - x*z^13 - 2*y*z^12 + 2*y^2*z^9 - x*z^9 - x*y^2*z^3 - x*z^5 + y: y
+Its residue (i.e. mod GB of F_t): y
+Coefficients of z^12 - x*z^10 - 2*y*z^9 + 2*y^2*z^6 - x*z^6 - x*y^2 - x*z^2 and z^15 - x*z^13 - 2*y*z^12 + 2*y^2*z^9 - x*z^9 - x*y^2*z^3 - x*z^5 + y respectively: -z^3, 1
 Coefficients from F_t for the residue:
 Basis Element: -z^2 + x
 Multiplier: 0
-Basis Element: -y*z^4
-Multiplier: -1
-Basis Element: z^4 - y*z
-Multiplier: z^3
+Basis Element: z^12 - x*z^10 - 2*y*z^9 + 2*y^2*z^6 - x*z^6 - x*y^2 - x*z^2
+Multiplier: -z^3
+Basis Element: z^15 - x*z^13 - 2*y*z^12 + 2*y^2*z^9 - x*z^9 - x*y^2*z^3 - x*z^5 + y
+Multiplier: 1
 
-Current gb of F_t after completion: [-z^2 + x, -y*z^4, z^4 - y*z, z^7]
+Included S-polynomial of z^15 - x*z^13 - 2*y*z^12 + 2*y^2*z^9 - x*z^9 - x*y^2*z^3 - x*z^5 + y and y: -x*z^13 - x*z^9 - x*z^5 + 2*y^2*z^9 - 2*y*z^12 + y + z^15
+Its residue (i.e. mod GB of F_t): -z^11 - z^7
+Coefficients of z^15 - x*z^13 - 2*y*z^12 + 2*y^2*z^9 - x*z^9 - x*y^2*z^3 - x*z^5 + y and y respectively: 1, x*y*z^3
+Coefficients from F_t for the residue:
+Basis Element: -z^2 + x
+Multiplier: z^13 + z^9 + z^5
+Basis Element: z^12 - x*z^10 - 2*y*z^9 + 2*y^2*z^6 - x*z^6 - x*y^2 - x*z^2
+Multiplier: -x*y*z^6 + 2*y*z^12 - 2*z^15 + z^3
+Basis Element: z^15 - x*z^13 - 2*y*z^12 + 2*y^2*z^9 - x*z^9 - x*y^2*z^3 - x*z^5 + y
+Multiplier: x*y*z^3 - 2*y*z^9 + 2*z^12
 
-Redundant polynomial in extended Groebner basis computation: -y*z^4
+Included S-polynomial of z^12 - x*z^10 - 2*y*z^9 + 2*y^2*z^6 - x*z^6 - x*y^2 - x*z^2 and y: -x*z^10 - x*z^6 - x*z^2 + 2*y^2*z^6 - 2*y*z^9 + z^12
+Its residue (i.e. mod GB of F_t): -z^8 - z^4
+Coefficients of z^12 - x*z^10 - 2*y*z^9 + 2*y^2*z^6 - x*z^6 - x*y^2 - x*z^2 and y respectively: 1, x*y
+Coefficients from F_t for the residue:
+Basis Element: -z^2 + x
+Multiplier: z^10 + z^6 + z^2
+Basis Element: z^12 - x*z^10 - 2*y*z^9 + 2*y^2*z^6 - x*z^6 - x*y^2 - x*z^2
+Multiplier: -x*y*z^3 + 2*y*z^9 - 2*z^12 + 1
+Basis Element: z^15 - x*z^13 - 2*y*z^12 + 2*y^2*z^9 - x*z^9 - x*y^2*z^3 - x*z^5 + y
+Multiplier: x*y - 2*y*z^6 + 2*z^9
 
-Current gb of F_t after elimination of redundant terms: [x - z^2, -y*z + z^4, z^7]
+Current gb of F_t after completion: [-z^2 + x, z^12 - x*z^10 - 2*y*z^9 + 2*y^2*z^6 - x*z^6 - x*y^2 - x*z^2, z^15 - x*z^13 - 2*y*z^12 + 2*y^2*z^9 - x*z^9 - x*y^2*z^3 - x*z^5 + y, y, -z^11 - z^7, -z^8 - z^4]
+
+Redundant polynomial in extended Groebner basis computation: z^15 - x*z^13 - 2*y*z^12 + 2*y^2*z^9 - x*z^9 - x*y^2*z^3 - x*z^5 + y
+Redundant polynomial in extended Groebner basis computation: z^12 - x*z^10 - 2*y*z^9 + 2*y^2*z^6 - x*z^6 - x*y^2 - x*z^2
+Redundant polynomial in extended Groebner basis computation: -z^11 - z^7
+
+Current gb of F_t after elimination of redundant terms: [x - z^2, y, -z^8 - z^4]
 
 Matrix of multipliers M':
-[  1   0   0]
-[  0  -1 z^3]
-[  0   0  -1]
-H (= M' * F_t): [x - z^2, z^7, y*z - z^4]
+[                             1                              0                              0]
+[                             0                           -z^3                              1]
+[             -z^10 - z^6 - z^2 x*y*z^3 - 2*y*z^9 + 2*z^12 - 1         -x*y + 2*y*z^6 - 2*z^9]
+H (= M' * F_t): [x - z^2, y, z^8 + z^4]
 
 Step 5
 Matrix of multipliers M after update (i.e. M := M' * M):
-[                            0                             0                            -1]
-[                      y + z^3                             z x*y + x*z^3 + y*z^2 + z^5 - z]
-[                           -1                             0                      -x - z^2]
-G (= M' * F): [x - z^2, -y + z^7 - 2*z^3, y*z - z^4 + 1]
-G_full (= M * F_original) [x - z^2, -y + z^7 - 2*z^3, y*z - z^4 + 1]
+[                                                                                                                                                                                         0                                                                                                                                                                                          0                                                                                                                                                                                         -1]
+[                                                                                                                                                                                  -y - z^3                                                                                                                                                                                         -z                                                                                                                                                             -x*y - x*z^3 - y*z^2 - z^5 + z]
+[                                                                                             x*y*z^3 - x*z^10 - x*z^6 - x*z^2 + y^3*z^3 - 2*y^2*z^6 + y*z^5 + y*z + 3*z^12 + z^8 + z^4 - 1                                                                                                                                             x*y*z + y^2*z^4 - 3*y*z^7 + 2*z^10 + z^6 + z^2 x^2*y*z^3 - x^2*z^10 - x^2*z^6 - x^2*z^2 + x*y^3*z^3 - 2*x*y^2*z^6 + 2*x*y*z^5 + 2*x*z^12 - x + y^3*z^5 + y^3*z - 2*y^2*z^8 - 2*y^2*z^4 + y*z^11 + 5*y*z^7 + 2*y*z^3 + 2*z^14 - z^10 - z^2]
+G (= M' * F): [x - z^2, y - z^7 + 2*z^3, x*y*z^7 - 2*x*y*z^3 - 2*y*z^13 + 4*y*z^9 + 2*z^16 - 4*z^12 - z^8 - 2*z^4 + 1]
+G_full (= M * F_original) [x - z^2, y - z^7 + 2*z^3, x*y*z^7 - 2*x*y*z^3 - 2*y*z^13 + 4*y*z^9 + 2*z^16 - 4*z^12 - z^8 - 2*z^4 + 1]
 
 Step 6 and 7
-The h_j's: [x - z^2, z^7, y*z - z^4]
-The g_j's: [x - z^2, -y + z^7 - 2*z^3, y*z - z^4 + 1]
-These are the witness polynomials that prove G_s is not empty: g_j = -y + z^7 - 2*z^3, h_j = z^7
+The h_j's: [x - z^2, y, z^8 + z^4]
+The g_j's: [x - z^2, y - z^7 + 2*z^3, x*y*z^7 - 2*x*y*z^3 - 2*y*z^13 + 4*y*z^9 + 2*z^16 - 4*z^12 - z^8 - 2*z^4 + 1]
+These are the witness polynomials that prove G_s is not empty: g_j = x*y*z^7 - 2*x*y*z^3 - 2*y*z^13 + 4*y*z^9 + 2*z^16 - 4*z^12 - z^8 - 2*z^4 + 1, h_j = z^8 + z^4
 
-Current F: [x - z^2, -y + z^7 - 2*z^3, y*z - z^4 + 1]
-Current F_t: [-z^2 + x, z^7 - y, -z^4 + y*z]
+Current F: [x - z^2, y - z^7 + 2*z^3, x*y*z^7 - 2*x*y*z^3 - 2*y*z^13 + 4*y*z^9 + 2*z^16 - 4*z^12 - z^8 - 2*z^4 + 1]
+Current F_t: [-z^2 + x, -z^7 + y, 2*z^16 - 2*y*z^13 + 4*y*z^9 + x*y*z^7 - 2*x*y*z^3]
 
 Iteration 5
 
 Step 3 & 4
-Included S-polynomial of z^7 - y and -z^4 + y*z: z^8 - z^4
-Its residue (i.e. mod GB of F_t): z^8 - z^4
-Coefficients of z^7 - y and -z^4 + y*z respectively: z, 1
+Included S-polynomial of -z^7 + y and 2*z^16 - 2*y*z^13 + 4*y*z^9 + x*y*z^7 - 2*x*y*z^3: 2*x*y*z^3 - x*z^14 + 2*y*z^13 - 4*y*z^9 - 2*z^16
+Its residue (i.e. mod GB of F_t): 2*z^20 - 7*z^16 + 2*z^12
+Coefficients of -z^7 + y and 2*z^16 - 2*y*z^13 + 4*y*z^9 + x*y*z^7 - 2*x*y*z^3 respectively: x*z^7, -1
 Coefficients from F_t for the residue:
 Basis Element: -z^2 + x
-Multiplier: 0
-Basis Element: z^7 - y
-Multiplier: z
-Basis Element: -z^4 + y*z
-Multiplier: 1
+Multiplier: -2*y*z^3 + z^14
+Basis Element: -z^7 + y
+Multiplier: x*z^7 - 2*z^13 + 4*z^9 - 2*z^5
+Basis Element: 2*z^16 - 2*y*z^13 + 4*y*z^9 + x*y*z^7 - 2*x*y*z^3
+Multiplier: -1
 
-Current gb of F_t after completion: [-z^2 + x, z^7 - y, -z^4 + y*z, z^8 - z^4]
+Current gb of F_t after completion: [-z^2 + x, -z^7 + y, 2*z^16 - 2*y*z^13 + 4*y*z^9 + x*y*z^7 - 2*x*y*z^3, 2*z^20 - 7*z^16 + 2*z^12]
 
-Redundant polynomial in extended Groebner basis computation: -z^4 + y*z
+Redundant polynomial in extended Groebner basis computation: 2*z^16 - 2*y*z^13 + 4*y*z^9 + x*y*z^7 - 2*x*y*z^3
 
-Current gb of F_t after elimination of redundant terms: [x - z^2, -y + z^7, z^8 - z^4]
+Current gb of F_t after elimination of redundant terms: [x - z^2, y - z^7, 2*z^20 - 7*z^16 + 2*z^12]
 
 Matrix of multipliers M':
-[ 1  0  0]
-[ 0  z  1]
-[ 0 -1  0]
-H (= M' * F_t): [x - z^2, z^8 - z^4, y - z^7]
+[                             0                              1                              0]
+[                             1                              0                              0]
+[             -y*z^3 + 1/2*z^14 1/2*x*z^7 - z^13 + 2*z^9 - z^5                           -1/2]
+H (= M' * F_t): [y - z^7, x - z^2, z^20 - 7/2*z^16 + z^12]
 
 Step 5
 Matrix of multipliers M after update (i.e. M := M' * M):
-[                                      0                                       0                                      -1]
-[                          y*z + z^4 - 1                                     z^2 x*y*z + x*z^4 - x + y*z^3 + z^6 - 2*z^2]
-[                               -y - z^3                                      -z          -x*y - x*z^3 - y*z^2 - z^5 + z]
-G (= M' * F): [x - z^2, z^8 - 3*z^4 + 1, y - z^7 + 2*z^3]
-G_full (= M * F_original) [x - z^2, z^8 - 3*z^4 + 1, y - z^7 + 2*z^3]
+[                                                                                                                                                                                                                                                                              -y - z^3                                                                                                                                                                                                                                                                                     -z                                                                                                                                                                                                                                                         -x*y - x*z^3 - y*z^2 - z^5 + z]
+[                                                                                                                                                                                                                                                                                     0                                                                                                                                                                                                                                                                                      0                                                                                                                                                                                                                                                                                     -1]
+[                                                                                                                       -1/2*x*y*z^7 - 1/2*x*y*z^3 + 1/2*x*z^6 + 1/2*x*z^2 - 1/2*y^3*z^3 + y^2*z^6 + y*z^13 - 2*y*z^9 + 1/2*y*z^5 - 1/2*y*z + z^16 - 7/2*z^12 + 1/2*z^8 - 1/2*z^4 + 1/2                                                                                                                                                                                                   -1/2*x*y*z - 1/2*x*z^8 - 1/2*y^2*z^4 + 3/2*y*z^7 + z^14 - 3*z^10 + 1/2*z^6 - 1/2*z^2 -1/2*x^2*y*z^7 - 1/2*x^2*y*z^3 + 1/2*x^2*z^6 + 1/2*x^2*z^2 - 1/2*x*y^3*z^3 + x*y^2*z^6 + x*y*z^13 - 5/2*x*y*z^9 + x*z^16 - 7/2*x*z^12 + 3/2*x*z^8 + 1/2*x - 1/2*y^3*z^5 - 1/2*y^3*z + y^2*z^8 + y^2*z^4 + y*z^15 - 5/2*y*z^11 - 3/2*y*z^7 + z^18 - 9/2*z^14 + 7/2*z^10 - z^6 + 1/2*z^2]
+G (= M' * F): [y - z^7 + 2*z^3, x - z^2, x*z^10 + z^20 - 11/2*z^16 + 7*z^12 - 3/2*z^8 + z^4 - 1/2]
+G_full (= M * F_original) [y - z^7 + 2*z^3, x - z^2, x*z^10 + z^20 - 11/2*z^16 + 7*z^12 - 3/2*z^8 + z^4 - 1/2]
 
 Step 6 and 7
-The h_j's: [x - z^2, z^8 - z^4, y - z^7]
-The g_j's: [x - z^2, z^8 - 3*z^4 + 1, y - z^7 + 2*z^3]
+The h_j's: [y - z^7, x - z^2, z^20 - 7/2*z^16 + z^12]
+The g_j's: [y - z^7 + 2*z^3, x - z^2, x*z^10 + z^20 - 11/2*z^16 + 7*z^12 - 3/2*z^8 + z^4 - 1/2]
+These are the witness polynomials that prove G_s is not empty: g_j = x*z^10 + z^20 - 11/2*z^16 + 7*z^12 - 3/2*z^8 + z^4 - 1/2, h_j = z^20 - 7/2*z^16 + z^12
+
+Current F: [y - z^7 + 2*z^3, x - z^2, x*z^10 + z^20 - 11/2*z^16 + 7*z^12 - 3/2*z^8 + z^4 - 1/2]
+Current F_t: [-z^7 + y, -z^2 + x, z^20 + x*z^10]
+
+Iteration 6
+
+Step 3 & 4
+Included S-polynomial of -z^2 + x and z^20 + x*z^10: -z^20 - z^12
+Its residue (i.e. mod GB of F_t): -z^20 - z^12
+Coefficients of -z^2 + x and z^20 + x*z^10 respectively: z^10, -1
+Coefficients from F_t for the residue:
+Basis Element: -z^7 + y
+Multiplier: 0
+Basis Element: -z^2 + x
+Multiplier: z^10
+Basis Element: z^20 + x*z^10
+Multiplier: -1
+
+Current gb of F_t after completion: [-z^7 + y, -z^2 + x, z^20 + x*z^10, -z^20 - z^12]
+
+Redundant polynomial in extended Groebner basis computation: z^20 + x*z^10
+
+Current gb of F_t after elimination of redundant terms: [y - z^7, x - z^2, -z^20 - z^12]
+
+Matrix of multipliers M':
+[    1     0     0]
+[    0     1     0]
+[    0 -z^10     1]
+H (= M' * F_t): [y - z^7, x - z^2, z^20 + z^12]
+
+Step 5
+Matrix of multipliers M after update (i.e. M := M' * M):
+[                                                                                                                                                                                                                                                                              -y - z^3                                                                                                                                                                                                                                                                                     -z                                                                                                                                                                                                                                                         -x*y - x*z^3 - y*z^2 - z^5 + z]
+[                                                                                                                                                                                                                                                                                     0                                                                                                                                                                                                                                                                                      0                                                                                                                                                                                                                                                                                     -1]
+[                                                                                                                       -1/2*x*y*z^7 - 1/2*x*y*z^3 + 1/2*x*z^6 + 1/2*x*z^2 - 1/2*y^3*z^3 + y^2*z^6 + y*z^13 - 2*y*z^9 + 1/2*y*z^5 - 1/2*y*z + z^16 - 7/2*z^12 + 1/2*z^8 - 1/2*z^4 + 1/2                                                                                                                                                                                                   -1/2*x*y*z - 1/2*x*z^8 - 1/2*y^2*z^4 + 3/2*y*z^7 + z^14 - 3*z^10 + 1/2*z^6 - 1/2*z^2 -1/2*x^2*y*z^7 - 1/2*x^2*y*z^3 + 1/2*x^2*z^6 + 1/2*x^2*z^2 - 1/2*x*y^3*z^3 + x*y^2*z^6 + x*y*z^13 - 5/2*x*y*z^9 + x*z^16 - 7/2*x*z^12 + 3/2*x*z^8 + 1/2*x - 1/2*y^3*z^5 - 1/2*y^3*z + y^2*z^8 + y^2*z^4 + y*z^15 - 5/2*y*z^11 - 3/2*y*z^7 + z^18 - 9/2*z^14 + 9/2*z^10 - z^6 + 1/2*z^2]
+G (= M' * F): [y - z^7 + 2*z^3, x - z^2, z^20 - 11/2*z^16 + 8*z^12 - 3/2*z^8 + z^4 - 1/2]
+G_full (= M * F_original) [y - z^7 + 2*z^3, x - z^2, z^20 - 11/2*z^16 + 8*z^12 - 3/2*z^8 + z^4 - 1/2]
+
+Step 6 and 7
+The h_j's: [y - z^7, x - z^2, z^20 + z^12]
+The g_j's: [y - z^7 + 2*z^3, x - z^2, z^20 - 11/2*z^16 + 8*z^12 - 3/2*z^8 + z^4 - 1/2]
 Done
 
-Current gb of F_t after elimination of redundant terms: [x - z^2, z^8 - 3*z^4 + 1, y - z^7 + 2*z^3]
+Current gb of F_t after elimination of redundant terms: [y - z^7 + 2*z^3, x - z^2, z^20 - 11/2*z^16 + 8*z^12 - 3/2*z^8 + z^4 - 1/2]
 
 Results:
-Groebner basis produced: [z^8 - 3*z^4 + 1, y - z^7 + 2*z^3, x - z^2]
+Groebner basis produced: [z^20 - 11/2*z^16 + 8*z^12 - 3/2*z^8 + z^4 - 1/2, y - z^7 + 2*z^3, x - z^2]
 Associated matrix:
-[                                      0                                       0                                      -1]
-[                          y*z + z^4 - 1                                     z^2 x*y*z + x*z^4 - x + y*z^3 + z^6 - 2*z^2]
-[                               -y - z^3                                      -z          -x*y - x*z^3 - y*z^2 - z^5 + z]
+[                                                                                                                                                                                                                                                                              -y - z^3                                                                                                                                                                                                                                                                                     -z                                                                                                                                                                                                                                                         -x*y - x*z^3 - y*z^2 - z^5 + z]
+[                                                                                                                                                                                                                                                                                     0                                                                                                                                                                                                                                                                                      0                                                                                                                                                                                                                                                                                     -1]
+[                                                                                                                       -1/2*x*y*z^7 - 1/2*x*y*z^3 + 1/2*x*z^6 + 1/2*x*z^2 - 1/2*y^3*z^3 + y^2*z^6 + y*z^13 - 2*y*z^9 + 1/2*y*z^5 - 1/2*y*z + z^16 - 7/2*z^12 + 1/2*z^8 - 1/2*z^4 + 1/2                                                                                                                                                                                                   -1/2*x*y*z - 1/2*x*z^8 - 1/2*y^2*z^4 + 3/2*y*z^7 + z^14 - 3*z^10 + 1/2*z^6 - 1/2*z^2 -1/2*x^2*y*z^7 - 1/2*x^2*y*z^3 + 1/2*x^2*z^6 + 1/2*x^2*z^2 - 1/2*x*y^3*z^3 + x*y^2*z^6 + x*y*z^13 - 5/2*x*y*z^9 + x*z^16 - 7/2*x*z^12 + 3/2*x*z^8 + 1/2*x - 1/2*y^3*z^5 - 1/2*y^3*z + y^2*z^8 + y^2*z^4 + y*z^15 - 5/2*y*z^11 - 3/2*y*z^7 + z^18 - 9/2*z^14 + 9/2*z^10 - z^6 + 1/2*z^2]
 Check if basis is Groebner basis: True
 Groebner basis computed by Sage: [z^8 - 3*z^4 + 1, y - z^7 + 2*z^3, x - z^2]
-Check if the produced gb is the same as the gb produced by Sage: True
+Check if the produced gb is the same as the gb produced by Sage: False
 rm -rf *.py
