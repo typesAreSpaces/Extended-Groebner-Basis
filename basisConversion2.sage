@@ -217,7 +217,8 @@ def existsReduciblePoly(polys, family_coeffs, R):
 
 def reduceBasis(original_basis, basis, family_coeffs, R):
     basis_ = deque(basis)
-    print "\nCurrent gb of F_t after elimination of redundant terms: {}\n".format(basis_)
+    print "\nCurrent gb of F_t after elimination"\
+            " of redundant terms: {}\n".format([poly for poly in family_coeffs.toMatrix() * vector(original_basis)])
     while(True):
         (termination_condition, coeffs_poly, \
                 poly_entry, poly, residue) = existsReduciblePoly(basis_, family_coeffs, R)
