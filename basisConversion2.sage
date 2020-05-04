@@ -6,6 +6,12 @@ from itertools                                         import combinations
 from collections                                       import deque, OrderedDict
 from StringIO                                          import StringIO
 
+# If _global_reverse is True, the policy is to reduce
+# bigger polynomial as soon as possible.
+# Otherwise, the policy is to reduce smaller
+# polynomials as soon as possible.
+_global_reverse = False
+
 def push_row(M, row):
     return matrix(M.rows() + [row])
 
@@ -224,7 +230,7 @@ def reduceBasis(original_basis, basis, family_coeffs, R, priority=False):
         # instead of reducing a "smaller polynomial" first even if
         # in both cases it doesn't matter which ones gets reduced
         if(priority):
-            basis_ = deque(sorted(basis_))
+            basis_ = deque(sorted(basis_, reverse=_global_reverse))
         (termination_condition, coeffs_poly, \
                 poly_entry, poly, residue) = existsReduciblePoly(basis_, family_coeffs, R)
         if(not termination_condition):
@@ -261,7 +267,7 @@ def redExtGroebnerBasis(original_polys, polys, R, priority=False):
         # instead of reducing a "smaller polynomial" first even if
         # in both cases it doesn't matter which ones gets reduced
         if(priority):
-            gbasis.sort()
+            gbasis.sort(reverse=_global_reverse)
         poly = gbasis.pop()
         if (not isPolyRedundantInBasis(poly, gbasis, R)) \
                 and (not isPolyRedundantInBasis(poly, gbasis_, R)):
@@ -530,8 +536,8 @@ def testBasisConversion():
 def testBasisConversion2(R1, R2, basis1):
     print("Basis: {} From {} {} to {} {}".\
             format(basis1, R1, R1.term_order(), R2, R2.term_order()))
-    # gb, M = basisConversion2(basis1, R1, R2, False)
-    gb, M = basisConversion2(basis1, R1, R2, True)
+    priority = True
+    gb, M = basisConversion2(basis1, R1, R2, priority)
     print "Results:" 
     gb.sort()
     print "Groebner basis produced: {}".format(gb)
