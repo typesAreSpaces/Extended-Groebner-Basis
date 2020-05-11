@@ -177,14 +177,14 @@ def extGroebnerBasis(original_polys, polys, R):
         g = m1*g1 - m2*g2
         (coeffs, residue) = redPol(g, G, R)
         if(residue != 0):
-            print "Included S-polynomial of {} and {}: {}\nIts residue (i.e. mod GB of F_t): {}"\
-                    "\nCoefficients of {} and {} respectively: {}, {}"\
-                    .format(g1, g2, g, residue, g1, g2, m1, -m2)
+            # print "Included S-polynomial of {} and {}: {}\nIts residue (i.e. mod GB of F_t): {}"\
+                    # "\nCoefficients of {} and {} respectively: {}, {}"\
+                    # .format(g1, g2, g, residue, g1, g2, m1, -m2)
             family_coeffs.keyInit(residue)
             for indexing_polynomial, coeff in coeffs.items():
                 family_coeffs[residue] += family_coeffs[indexing_polynomial] * (-coeff)
             family_coeffs[residue] += family_coeffs[g1] * m1 + family_coeffs[g2] * (-m2)
-            print "Coefficients from F_t for the residue:\n{}".format(family_coeffs[residue])
+            # print "Coefficients from F_t for the residue:\n{}".format(family_coeffs[residue])
             for element in G:
                 B.append((element, residue))
             G.append(residue)
@@ -223,8 +223,8 @@ def existsReduciblePoly(polys, family_coeffs, R):
 
 def reduceBasis(original_basis, basis, family_coeffs, R, priority=False):
     basis_ = deque(basis)
-    print "\nCurrent gb of F_t after elimination"\
-            " of redundant terms: {}\n".format([poly for poly in family_coeffs.toMatrix() * vector(original_basis)])
+    # print "\nCurrent gb of F_t after elimination"\
+            # " of redundant terms: {}\n".format([poly for poly in family_coeffs.toMatrix() * vector(original_basis)])
     while(True):
         # The following .sort() makes sure we reduce a "bigger polynomial"
         # instead of reducing a "smaller polynomial" first even if
@@ -235,13 +235,13 @@ def reduceBasis(original_basis, basis, family_coeffs, R, priority=False):
                 poly_entry, poly, residue) = existsReduciblePoly(basis_, family_coeffs, R)
         if(not termination_condition):
             break
-        print "Reduce Basis: This poly {} reduces to {}".format(poly, residue)
+        # print "Reduce Basis: This poly {} reduces to {}".format(poly, residue)
         if(residue != 0):
             family_coeffs.keyInit(residue)
             for indexing_polynomial, coeff in coeffs_poly.items():
                 family_coeffs[residue] += family_coeffs[indexing_polynomial] * (-coeff)
             family_coeffs[residue] += poly_entry 
-            print "Coefficients:\n{}".format(family_coeffs[residue])
+            # print "Coefficients:\n{}".format(family_coeffs[residue])
             basis_.appendleft(residue)
 
     num_elements = len(basis_)
@@ -259,7 +259,7 @@ def reduceBasis(original_basis, basis, family_coeffs, R, priority=False):
 def redExtGroebnerBasis(original_polys, polys, R, priority=False):
     (gbasis, family_coeffs) = extGroebnerBasis(original_polys, polys, R)
 
-    print "Current gb of F_t after completion: {}\n".format(gbasis)
+    # print "Current gb of F_t after completion: {}\n".format(gbasis)
 
     gbasis_ = []
     while (gbasis):
@@ -273,7 +273,7 @@ def redExtGroebnerBasis(original_polys, polys, R, priority=False):
                 and (not isPolyRedundantInBasis(poly, gbasis_, R)):
             gbasis_.append(poly)
         else:
-            print "Redundant polynomial in extended Groebner basis computation: {}".format(poly)
+            # print "Redundant polynomial in extended Groebner basis computation: {}".format(poly)
             del family_coeffs[poly]
 
     reduced_gb = reduceBasis(original_polys, gbasis_, family_coeffs, R, priority)
@@ -536,7 +536,7 @@ def testBasisConversion():
 def testBasisConversion2(R1, R2, basis1):
     print("Basis: {} From {} {} to {} {}".\
             format(basis1, R1, R1.term_order(), R2, R2.term_order()))
-    priority = True
+    priority = False
     gb, M = basisConversion2(basis1, R1, R2, priority)
     print "Results:" 
     gb.sort()

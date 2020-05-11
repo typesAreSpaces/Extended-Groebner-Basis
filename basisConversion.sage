@@ -377,6 +377,7 @@ def basisConversion(basis, R1, R2):
                 repeat = True
                 break
             index += 1
+
         if(not repeat):
             print "Done"
             original_G = deepcopy(G)

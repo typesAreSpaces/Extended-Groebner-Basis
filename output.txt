@@ -1,0 +1,141 @@
+sage basisConversion2.sage
+Basis: [-x + y^2, x^2 - y*z - 1, -x + z^2] From Multivariate Polynomial Ring in x, y, z over Rational Field Degree lexicographic term order to Multivariate Polynomial Ring in x, y, z over Rational Field Lexicographic term order
+Step 1
+Groebner basis wrt R1: [x^2 - y*z - 1, y^2 - x, z^2 - x]
+
+Current F: [x^2 - y*z - 1, y^2 - x, z^2 - x]
+Current F_t: [x^2, y^2 - x, z^2 - x]
+
+Iteration 1
+
+Step 3 & 4
+Matrix of multipliers M':
+[      0       0      -1]
+[      1       0 x + z^2]
+[      0       1      -1]
+H (= M' * F_t): [x - z^2, z^4, y^2 - z^2]
+
+Step 5
+Matrix of multipliers M after update (i.e. M := M' * M):
+[      0       0      -1]
+[      1       0 x + z^2]
+[      0       1      -1]
+G (= M' * F): [x - z^2, -y*z + z^4 - 1, y^2 - z^2]
+G_full (= M * F_original) [x - z^2, -y*z + z^4 - 1, y^2 - z^2]
+
+Step 6 and 7
+The h_j's: [x - z^2, z^4, y^2 - z^2]
+The g_j's: [x - z^2, -y*z + z^4 - 1, y^2 - z^2]
+These are the witness polynomials that prove G_s is not empty: g_j = -y*z + z^4 - 1, h_j = z^4
+
+Current F: [x - z^2, -y*z + z^4 - 1, y^2 - z^2]
+Current F_t: [-z^2 + x, z^4 - y*z, y^2]
+
+Iteration 2
+
+Step 3 & 4
+Matrix of multipliers M':
+[      1       0       0]
+[      0       0       1]
+[      0 y + z^3       z]
+[      0      -1       0]
+H (= M' * F_t): [x - z^2, y^2, z^7, y*z - z^4]
+
+Step 5
+Matrix of multipliers M after update (i.e. M := M' * M):
+[                            0                             0                            -1]
+[                            0                             1                            -1]
+[                      y + z^3                             z x*y + x*z^3 + y*z^2 + z^5 - z]
+[                           -1                             0                      -x - z^2]
+G (= M' * F): [x - z^2, y^2 - z^2, -y + z^7 - 2*z^3, y*z - z^4 + 1]
+G_full (= M * F_original) [x - z^2, y^2 - z^2, -y + z^7 - 2*z^3, y*z - z^4 + 1]
+
+Step 6 and 7
+The h_j's: [x - z^2, y^2, z^7, y*z - z^4]
+The g_j's: [x - z^2, y^2 - z^2, -y + z^7 - 2*z^3, y*z - z^4 + 1]
+These are the witness polynomials that prove G_s is not empty: g_j = -y + z^7 - 2*z^3, h_j = z^7
+
+Current F: [x - z^2, y^2 - z^2, -y + z^7 - 2*z^3, y*z - z^4 + 1]
+Current F_t: [-z^2 + x, y^2, z^7 - y, -z^4 + y*z]
+
+Iteration 3
+
+Step 3 & 4
+Matrix of multipliers M':
+[                 1                  0                  0                  0]
+[                 0                z^5           -z^4 - 1 -y*z^4 - z^7 - z^3]
+[                 0                z^2                 -z     -y*z - z^4 - 1]
+H (= M' * F_t): [x - z^2, y, z^4]
+
+Step 5
+Matrix of multipliers M after update (i.e. M := M' * M):
+[               0                0               -1]
+[              -y               -z -x*y - y*z^2 + z]
+[               1                0          x + z^2]
+G (= M' * F): [x - z^2, -y*z^4 + y + z^3, -y*z + z^4 - 1]
+G_full (= M * F_original) [x - z^2, -y*z^4 + y + z^3, -y*z + z^4 - 1]
+
+Step 6 and 7
+The h_j's: [x - z^2, y, z^4]
+The g_j's: [x - z^2, -y*z^4 + y + z^3, -y*z + z^4 - 1]
+These are the witness polynomials that prove G_s is not empty: g_j = -y*z^4 + y + z^3, h_j = y
+
+Current F: [x - z^2, -y*z^4 + y + z^3, -y*z + z^4 - 1]
+Current F_t: [-z^2 + x, -y*z^4, z^4 - y*z]
+
+Iteration 4
+
+Step 3 & 4
+Matrix of multipliers M':
+[  1   0   0]
+[  0  -1 z^3]
+[  0   0  -1]
+H (= M' * F_t): [x - z^2, z^7, y*z - z^4]
+
+Step 5
+Matrix of multipliers M after update (i.e. M := M' * M):
+[                            0                             0                            -1]
+[                      y + z^3                             z x*y + x*z^3 + y*z^2 + z^5 - z]
+[                           -1                             0                      -x - z^2]
+G (= M' * F): [x - z^2, -y + z^7 - 2*z^3, y*z - z^4 + 1]
+G_full (= M * F_original) [x - z^2, -y + z^7 - 2*z^3, y*z - z^4 + 1]
+
+Step 6 and 7
+The h_j's: [x - z^2, z^7, y*z - z^4]
+The g_j's: [x - z^2, -y + z^7 - 2*z^3, y*z - z^4 + 1]
+These are the witness polynomials that prove G_s is not empty: g_j = -y + z^7 - 2*z^3, h_j = z^7
+
+Current F: [x - z^2, -y + z^7 - 2*z^3, y*z - z^4 + 1]
+Current F_t: [-z^2 + x, z^7 - y, -z^4 + y*z]
+
+Iteration 5
+
+Step 3 & 4
+Matrix of multipliers M':
+[ 1  0  0]
+[ 0  z  1]
+[ 0 -1  0]
+H (= M' * F_t): [x - z^2, z^8 - z^4, y - z^7]
+
+Step 5
+Matrix of multipliers M after update (i.e. M := M' * M):
+[                                      0                                       0                                      -1]
+[                          y*z + z^4 - 1                                     z^2 x*y*z + x*z^4 - x + y*z^3 + z^6 - 2*z^2]
+[                               -y - z^3                                      -z          -x*y - x*z^3 - y*z^2 - z^5 + z]
+G (= M' * F): [x - z^2, z^8 - 3*z^4 + 1, y - z^7 + 2*z^3]
+G_full (= M * F_original) [x - z^2, z^8 - 3*z^4 + 1, y - z^7 + 2*z^3]
+
+Step 6 and 7
+The h_j's: [x - z^2, z^8 - z^4, y - z^7]
+The g_j's: [x - z^2, z^8 - 3*z^4 + 1, y - z^7 + 2*z^3]
+Done
+Results:
+Groebner basis produced: [z^8 - 3*z^4 + 1, y - z^7 + 2*z^3, x - z^2]
+Associated matrix:
+[                                      0                                       0                                      -1]
+[                          y*z + z^4 - 1                                     z^2 x*y*z + x*z^4 - x + y*z^3 + z^6 - 2*z^2]
+[                               -y - z^3                                      -z          -x*y - x*z^3 - y*z^2 - z^5 + z]
+Check if basis is Groebner basis: True
+Groebner basis computed by Sage: [z^8 - 3*z^4 + 1, y - z^7 + 2*z^3, x - z^2]
+Check if the produced gb is the same as the gb produced by Sage: True
+rm -rf *.py
